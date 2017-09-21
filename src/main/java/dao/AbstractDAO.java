@@ -83,20 +83,20 @@ public class AbstractDAO<E> {
         LOGGER.info("delete " + nameClass);
         EntityManager em = factory.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
-
-        Class<E> group = em.find(entityClass, entity.getId());
-
-        try {
-            transaction.begin();
-            em.remove(group);
-            transaction.commit();
-            LOGGER.info(nameClass + " was deleted");
-        } catch (Exception e) {
-            LOGGER.error(nameClass + " was not deleted", e);
-            transaction.rollback();
-        } finally {
-            em.close();
-        }
+        // сделать E extends id и тогда будут доступны поля
+//        Class<E> group = em.find(entityClass, entity.getClass().getId());
+//
+//        try {
+//            transaction.begin();
+//            em.remove(group);
+//            transaction.commit();
+//            LOGGER.info(nameClass + " was deleted");
+//        } catch (Exception e) {
+//            LOGGER.error(nameClass + " was not deleted", e);
+//            transaction.rollback();
+//        } finally {
+//            em.close();
+//        }
         return true;
 
     }

@@ -5,12 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="users")
-public class User {
-    @Column
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-
+public class User extends _IdEntity{
     @Column
     private String login;
 
@@ -36,14 +31,5 @@ public class User {
 
         return pass;
     }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
 
 }

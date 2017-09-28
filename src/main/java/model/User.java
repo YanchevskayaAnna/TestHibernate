@@ -5,17 +5,17 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="users")
-public class User {
-    @Column
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+public class User extends _IDEntity{
 
     @Column
     private String login;
 
     @Column
     private String pass;
+
+    @Column(name = "usertype")
+    @Enumerated(EnumType.STRING)
+    private UserType userType;
 
     public User() {
     }
@@ -33,17 +33,37 @@ public class User {
     }
 
     public String getPass() {
-
         return pass;
     }
 
-    public Integer getId() {
-        return id;
+    public UserType getUserType() {
+        return userType;
+    }
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        User user = (User) o;
+
+        if (login != null ? !login.equals(user.login) : user.login != null) return false;
+        if (pass != null ? !pass.equals(user.pass) : user.pass != null) return false;
+        return userType == user.userType;
+
     }
 
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (login != null ? login.hashCode() : 0);
+        result = 31 * result + (pass != null ? pass.hashCode() : 0);
+        result = 31 * result + (userType != null ? userType.hashCode() : 0);
+        return result;
+    }
 
 }

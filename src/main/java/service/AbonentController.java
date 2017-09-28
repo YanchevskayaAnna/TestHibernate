@@ -1,23 +1,25 @@
 package service;
 
 
-/**
- * Created by IT-Univer004 on 14.09.2017.
- */
+import dao.AbonentDao;
+import model.Abonent;
+
+import java.util.List;
+
 public class AbonentController {
 
-//    private AbonentDAO abonentDAO;
-//
-//    public AbonentController(AbonentDAO abonentDAO) {
-//        this.abonentDAO = abonentDAO;
-//    }
-//
-//    public List<Abonent> getAllAbonents() {
-//        return abonentDAO.getAll();
-//    }
-//
-//    public Abonent getEntityById(Integer id) throws Exception  {
-//        return abonentDAO.getById(id);
-//    }
+    private AbonentDao abonentDAO;
+
+    public AbonentController(AbonentDao abonentDAO) {
+        this.abonentDAO = abonentDAO;
+    }
+
+    public List<Abonent> getAllAbonents() {
+        return abonentDAO.getAll();
+    }
+
+    public Abonent getEntityById(Integer id) throws Exception  {
+        return abonentDAO.getEntityById(id);
+    }
 
 }

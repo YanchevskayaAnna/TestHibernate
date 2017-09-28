@@ -11,10 +11,9 @@ import javax.persistence.Persistence;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Created by user51 on 28/09/2017.
- */
+
 public class TestAbonent {
+
     private static AbonentController abonentController;
     private static EntityManagerFactory emFactory;
 
@@ -22,7 +21,6 @@ public class TestAbonent {
     public static void beforeClass() throws IOException {
 
         emFactory = Persistence.createEntityManagerFactory("hibernate-unit");
-
         abonentController = new AbonentController(new AbonentDao(emFactory));
 
     }

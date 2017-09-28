@@ -17,6 +17,8 @@ public class AbstractDAO<E extends _IDEntity> {
     private EntityManagerFactory factory;
     private static final Logger LOGGER = Logger.getLogger(AbstractDAO.class.getName());
 
+    //Сделать try finally через лямбду, передавать метод как параметр
+
     public AbstractDAO(EntityManagerFactory factory) {
         this.factory = factory;
     }
@@ -32,7 +34,7 @@ public class AbstractDAO<E extends _IDEntity> {
         return em.find(entityClass, id);
     }
 
-    boolean update(E entity){
+    public boolean update(E entity){
 
         LOGGER.info("update " + nameClass);
 
@@ -55,7 +57,7 @@ public class AbstractDAO<E extends _IDEntity> {
 
     }
 
-    boolean create(E entity){
+    public boolean create(E entity){
 
         LOGGER.info("create new " + nameClass);
 
@@ -78,12 +80,12 @@ public class AbstractDAO<E extends _IDEntity> {
 
     }
 
-    boolean delete(E entity){
+    public boolean delete(E entity){
 
         LOGGER.info("delete " + nameClass);
         EntityManager em = factory.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
-        // сделать E extends id и тогда будут доступны поля
+        // сделали E extends id и поэтому доступно поле id
         E delEntity = em.find(entityClass, entity.getId());
 
         try {
@@ -100,6 +102,5 @@ public class AbstractDAO<E extends _IDEntity> {
         return true;
 
     }
-
 
 }

@@ -5,17 +5,19 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import java.util.List;
+
+import model._IDEntity;
 import org.apache.log4j.Logger;
 
-/**
- * Created by IT-Univer004 on 21.09.2017.
- */
-public class AbstractDAO<E> {
+
+public class AbstractDAO<E extends _IDEntity> {
 
     private Class<E> entityClass;
     private String nameClass = entityClass.getSimpleName();
     private EntityManagerFactory factory;
     private static final Logger LOGGER = Logger.getLogger(AbstractDAO.class.getName());
+
+    //Сделать try finally через лямбду, передавать метод как параметр
 
     public AbstractDAO(EntityManagerFactory factory) {
         this.factory = factory;
@@ -27,14 +29,14 @@ public class AbstractDAO<E> {
         return namedQuery.getResultList();
     }
 
-    E getEntityById(Integer id){
+    public E getEntityById(Integer id){
         EntityManager em = factory.createEntityManager();
         return em.find(entityClass, id);
     }
 
-    boolean update(E entity){
+    public boolean update(E entity){
 
-        LOGGER.info("update " + entityClass.getSimpleName());
+        LOGGER.info("update " + nameClass);
 
         EntityManager em = factory.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
@@ -55,7 +57,7 @@ public class AbstractDAO<E> {
 
     }
 
-    boolean create(E entity){
+    public boolean create(E entity){
 
         LOGGER.info("create new " + nameClass);
 
@@ -78,28 +80,27 @@ public class AbstractDAO<E> {
 
     }
 
-    boolean delete(E entity){
+    public boolean delete(E entity){
 
         LOGGER.info("delete " + nameClass);
         EntityManager em = factory.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
-        // сделать E extends id и тогда будут доступны поля
-//        Class<E> group = em.find(entityClass, entity.getClass().getId());
-//
-//        try {
-//            transaction.begin();
-//            em.remove(group);
-//            transaction.commit();
-//            LOGGER.info(nameClass + " was deleted");
-//        } catch (Exception e) {
-//            LOGGER.error(nameClass + " was not deleted", e);
-//            transaction.rollback();
-//        } finally {
-//            em.close();
-//        }
+        // сделали E extends id и поэтому доступно поле id
+        E delEntity = em.find(entityClass, entity.getId());
+
+        try {
+            transaction.begin();
+            em.remove(delEntity);
+            transaction.commit();
+            LOGGER.info(nameClass + " was deleted");
+        } catch (Exception e) {
+            LOGGER.error(nameClass + " was not deleted", e);
+            transaction.rollback();
+        } finally {
+            em.close();
+        }
         return true;
 
     }
-
 
 }

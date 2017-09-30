@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="calls")
+@NamedQuery(name = "Call.getAll", query = "SELECT c from Call c")
 public class Call extends _IDEntity{
 
     @ManyToOne(cascade = CascadeType.MERGE)

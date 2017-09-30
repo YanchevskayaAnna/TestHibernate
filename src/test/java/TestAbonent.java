@@ -1,4 +1,5 @@
 import dao.AbonentDao;
+import dao.AbstractDAO;
 import model.Abonent;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -22,7 +23,6 @@ public class TestAbonent {
 
         emFactory = Persistence.createEntityManagerFactory("hibernate-unit");
         abonentController = new AbonentController(new AbonentDao(emFactory));
-
     }
 
     @AfterClass
@@ -48,7 +48,7 @@ public class TestAbonent {
 
         Abonent testAbonent = new Abonent();
         testAbonent.setName("test abonent");
-        abonentController.createAbonent(testAbonent);
+//        abonentController.createAbonent(testAbonent);
 
         Abonent deleteAbonent = abonentController.getAbonentById(3);
         abonentController.deleteAbonent(deleteAbonent);

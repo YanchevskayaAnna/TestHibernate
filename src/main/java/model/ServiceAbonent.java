@@ -5,6 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name="service_abonents")
+@NamedQuery(name = "ServiceAbonent.getAll", query = "SELECT c from ServiceAbonent c")
 public class ServiceAbonent extends _IDEntity{
 
     @ManyToOne(cascade = CascadeType.MERGE)

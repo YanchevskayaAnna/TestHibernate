@@ -13,14 +13,16 @@ import org.apache.log4j.Logger;
 public class AbstractDAO<E extends _IDEntity> {
 
     private Class<E> entityClass;
-    private String nameClass = entityClass.getSimpleName();
-    private EntityManagerFactory factory;
+    private String nameClass;
+    protected EntityManagerFactory factory;
     private static final Logger LOGGER = Logger.getLogger(AbstractDAO.class.getName());
 
     //Сделать try finally через лямбду, передавать метод как параметр
 
-    public AbstractDAO(EntityManagerFactory factory) {
+    public AbstractDAO(EntityManagerFactory factory, Class<E> entityClass) {
         this.factory = factory;
+        this.entityClass = entityClass;
+        this.nameClass = entityClass.getSimpleName();
     }
 
     public List<E> getAll() {

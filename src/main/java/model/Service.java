@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="services")
+@NamedQuery(name = "Service.getAll", query = "SELECT c from Service c")
 public class Service extends _IDEntity{
 
     @Column

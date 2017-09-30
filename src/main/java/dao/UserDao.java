@@ -7,7 +7,7 @@ import javax.persistence.EntityManagerFactory;
 public class UserDao extends AbstractDAO<User> {
 
     public UserDao(EntityManagerFactory factory) {
-        super(factory);
+        super(factory, User.class);
     }
 
 }

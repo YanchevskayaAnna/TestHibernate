@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 public class AbonentDao extends AbstractDAO<Abonent>{
 
     public AbonentDao(EntityManagerFactory factory) {
-        super(factory);
+        super(factory, Abonent.class);
+//        this.factory = factory;
     }
 }

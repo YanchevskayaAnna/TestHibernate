@@ -5,6 +5,7 @@ import java.util.List;
 
 @Entity
 @Table(name="abonents")
+@NamedQuery(name = "Abonent.getAll", query = "SELECT c from Abonent c")
 public class Abonent extends _IDEntity{
 
     @Column

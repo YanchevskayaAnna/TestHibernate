@@ -5,6 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name="payments")
+@NamedQuery(name = "Payment.getAll", query = "SELECT c from Payment c")
 public class Payment extends _IDEntity{
 
     @ManyToOne(cascade = CascadeType.MERGE)

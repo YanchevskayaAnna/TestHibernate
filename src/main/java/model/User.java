@@ -6,6 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name="users")
+@NamedQuery(name = "User.getAll", query = "SELECT c from User c")
 public class User extends _IDEntity{
 
     @Column

@@ -1,39 +1,36 @@
 package model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 @MappedSuperclass
-public class _IdEntity {
-
+public class _IDEntity {
+    @Column
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public Integer id;
 
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
     @Override
     public boolean equals(Object o) {
+
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        _IdEntity idEntity = (_IdEntity) o;
+        _IDEntity idEntity = (_IDEntity) o;
 
-        return id == idEntity.id;
+        return id != null ? id.equals(idEntity.id) : idEntity.id == null;
 
     }
 
     @Override
     public int hashCode() {
-        return id;
+        return id != null ? id.hashCode() : 0;
     }
 }

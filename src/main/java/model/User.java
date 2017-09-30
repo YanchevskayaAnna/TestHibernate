@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -16,6 +17,9 @@ public class User extends _IDEntity{
     @Column(name = "usertype")
     @Enumerated(EnumType.STRING)
     private UserType userType;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Abonent> abonentList;
 
     public User() {
     }
@@ -55,6 +59,16 @@ public class User extends _IDEntity{
         if (pass != null ? !pass.equals(user.pass) : user.pass != null) return false;
         return userType == user.userType;
 
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "login='" + login + '\'' +
+                ", pass='" + pass + '\'' +
+                ", userType=" + userType +
+                ", abonentList=" + abonentList +
+                '}';
     }
 
     @Override

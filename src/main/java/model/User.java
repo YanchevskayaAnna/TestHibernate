@@ -22,7 +22,14 @@ public class User extends _IDEntity{
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Abonent> abonentList;
 
+    public User(String login, String pass, UserType userType) {
+        this.login = login;
+        this.pass = pass;
+        this.userType = userType;
+    }
+
     public User() {
+
     }
 
     public String getLogin() {

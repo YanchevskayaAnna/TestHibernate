@@ -25,6 +25,11 @@ public class Abonent extends _IDEntity{
     public Abonent() {
     }
 
+    public Abonent(String name, User user) {
+        this.name = name;
+        this.user = user;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -24,6 +24,13 @@ public class ServiceAbonent extends _IDEntity{
     @Column
     private Date dateTo;
 
+    public ServiceAbonent(Service service, Abonent abonent, Date dateFrom, Date dateTo) {
+        this.service = service;
+        this.abonent = abonent;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
+    }
+
     public ServiceAbonent() {
     }
 

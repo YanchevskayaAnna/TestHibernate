@@ -16,6 +16,11 @@ public class Service extends _IDEntity{
     public Service() {
     }
 
+    public Service(String name, int subscriptionFee) {
+        this.name = name;
+        this.subscriptionFee = subscriptionFee;
+    }
+
     public String getName() {
         return name;
     }

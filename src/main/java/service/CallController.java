@@ -7,6 +7,7 @@ import model.Abonent;
 import model.Call;
 
 import java.util.List;
+import java.util.Map;
 
 public class CallController {
 
@@ -34,6 +35,10 @@ public class CallController {
 
     public boolean deleteCall(Call call)   {
         return callDAO.delete(call);
+    }
+
+    public Map<Abonent, Integer> getAverageDuration(){
+        return callDAO.getAverageDuration();
     }
 
 }

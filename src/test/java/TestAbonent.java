@@ -9,11 +9,7 @@ import service.*;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-
+import java.util.*;
 
 public class TestAbonent {
 
@@ -92,6 +88,12 @@ public class TestAbonent {
     public void getAllAbonents() {
         List<Abonent> abonentList = abonentController.getAllAbonents();
         Assert.assertNotNull(abonentList);
+    }
+
+    @Test
+    public void getAverageDuration() {
+        Map<Abonent, Integer> averageDuration = callController.getAverageDuration();
+        Assert.assertNotNull(averageDuration);
     }
 
     @Test

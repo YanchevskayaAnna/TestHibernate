@@ -4,10 +4,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import service.AbonentController;
-import service.ServiceAbonentController;
-import service.ServiceController;
-import service.UserController;
+import service.*;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -24,6 +21,8 @@ public class TestAbonent {
     private static ServiceController serviceController;
     private static UserController userController;
     private static ServiceAbonentController serviceAbonentController;
+    private static CallController callController;
+    private static PaymentController paymentController;
     private static EntityManagerFactory emFactory;
 
     @BeforeClass
@@ -34,6 +33,8 @@ public class TestAbonent {
         serviceController = new ServiceController(new ServiceDao(emFactory));
         userController = new UserController(new UserDao(emFactory));
         serviceAbonentController = new ServiceAbonentController(new ServiceAbonentDao(emFactory));
+        callController = new CallController(new CallDao(emFactory));
+        paymentController = new PaymentController(new PaymentDao(emFactory));
         initDB();
     }
 
@@ -53,12 +54,33 @@ public class TestAbonent {
                 new User("admin", "1qaz2wsx3edc", UserType.ADMIN)));
 
         userList.stream().forEach(user -> {
+            //Abonent
             Abonent abonent = new Abonent("abonent_" + user.getLogin(), user);
             abonentController.createAbonent(abonent);
+
+            //Calls
+            Call call1 = new Call(abonent, CallType.IN, "+380672173946", 32);
+            callController.createCall(call1);
+            Call call2 = new Call(abonent, CallType.OUT, "+380672173946", 32);
+            callController.createCall(call2);
+
+            //Payments
+            Payment payment1 = new Payment(abonent, new Date(90000), 100);
+            paymentController.createPayment(payment1);
+
+            Payment payment2 = new Payment(abonent, new Date(10000), 100);
+            paymentController.createPayment(payment2);
+
+            //Servises
             serviceList.stream().forEach(service -> {
             ServiceAbonent serviceAbonent = new ServiceAbonent(service, abonent, new Date(55555), null);
             serviceAbonentController.createServiceAbonent(serviceAbonent);});
         });
+
+        List<Call> callList = new ArrayList<>(Arrays.asList(
+                new Call(),
+                new Call(),
+                new Call()));
     }
 
     @AfterClass

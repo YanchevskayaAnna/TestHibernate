@@ -22,6 +22,12 @@ public class Payment extends _IDEntity{
     public Payment() {
     }
 
+    public Payment(Abonent abonent, Date paymentDay, int value) {
+        this.abonent = abonent;
+        this.paymentDay = paymentDay;
+        this.value = value;
+    }
+
     public Abonent getAbonent() {
         return abonent;
     }

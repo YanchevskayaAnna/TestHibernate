@@ -25,6 +25,13 @@ public class Call extends _IDEntity{
     public Call() {
     }
 
+    public Call(Abonent abonent, CallType callType, String corNumber, int duration) {
+        this.abonent = abonent;
+        this.callType = callType;
+        this.corNumber = corNumber;
+        this.duration = duration;
+    }
+
     public Abonent getAbonent() {
         return abonent;
     }

@@ -6,17 +6,17 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
+import dao.interfaces.iAbstractDAO;
 import model._IDEntity;
 import org.apache.log4j.Logger;
 
 
-public class AbstractDAO<E extends _IDEntity> {
+public class AbstractDAO<E extends _IDEntity> implements iAbstractDAO<E> {
 
     private Class<E> entityClass;
     private String nameClass;
     protected EntityManagerFactory factory;
     private static final Logger LOGGER = Logger.getLogger(AbstractDAO.class.getName());
-
     //Сделать try finally через лямбду, передавать метод как параметр
 
     public AbstractDAO(EntityManagerFactory factory, Class<E> entityClass) {
@@ -25,17 +25,20 @@ public class AbstractDAO<E extends _IDEntity> {
         this.nameClass = entityClass.getSimpleName();
     }
 
+    @Override
     public List<E> getAll() {
         EntityManager em = factory.createEntityManager();
         TypedQuery<E> namedQuery = em.createNamedQuery(nameClass + ".getAll", entityClass);
         return namedQuery.getResultList();
     }
 
+    @Override
     public E getEntityById(Integer id){
         EntityManager em = factory.createEntityManager();
         return em.find(entityClass, id);
     }
 
+    @Override
     public boolean update(E entity){
 
         LOGGER.info("update " + nameClass);
@@ -59,6 +62,7 @@ public class AbstractDAO<E extends _IDEntity> {
 
     }
 
+    @Override
     public boolean create(E entity){
 
         LOGGER.info("create new " + nameClass);

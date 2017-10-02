@@ -50,7 +50,17 @@ public class CallDao extends AbstractDAO<Call> implements iCallDao {
 
     @Override
     public Map<User, Integer> getAverageDurationUser() {
-        return null;
+        EntityManager em = factory.createEntityManager();
+        String queryString = "SELECT a.user,  AVG(c.duration) FROM Call c join c.abonent a GROUP BY a.user";
+        TypedQuery<Object[]> query = em.createQuery(queryString, Object[].class);
+        List<Object[]> resultList = query.getResultList();
+
+        HashMap<User, Integer> map = new HashMap<User, Integer>();
+
+        for (int i = 0; i < resultList.size(); i++) {
+            map.put((User) resultList.get(i)[0], ((Double) resultList.get(i)[1]).intValue());
+        }
+        return map;
     }
 
     @Override

@@ -5,6 +5,7 @@ import dao.AbonentDao;
 import dao.CallDao;
 import model.Abonent;
 import model.Call;
+import model.User;
 
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,10 @@ public class CallController {
 
     public Map<Abonent, Integer> getAverageDuration(){
         return callDAO.getAverageDuration();
+    }
+
+    public Map<User, Integer> getAverageDurationUser(){
+        return callDAO.getAverageDurationUser();
     }
 
 }

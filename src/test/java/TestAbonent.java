@@ -50,6 +50,7 @@ public class TestAbonent {
                 new User("admin", "1qaz2wsx3edc", UserType.ADMIN)));
 
         userList.stream().forEach(user -> {
+            userController.createUser(user);
             //Abonent
             Abonent abonent = new Abonent("abonent_" + user.getLogin(), user);
             abonentController.createAbonent(abonent);
@@ -72,11 +73,6 @@ public class TestAbonent {
             ServiceAbonent serviceAbonent = new ServiceAbonent(service, abonent, new Date(55555), null);
             serviceAbonentController.createServiceAbonent(serviceAbonent);});
         });
-
-        List<Call> callList = new ArrayList<>(Arrays.asList(
-                new Call(),
-                new Call(),
-                new Call()));
     }
 
     @AfterClass
@@ -93,6 +89,12 @@ public class TestAbonent {
     @Test
     public void getAverageDuration() {
         Map<Abonent, Integer> averageDuration = callController.getAverageDuration();
+        Assert.assertNotNull(averageDuration);
+    }
+
+    @Test
+    public void getAverageDurationUser() {
+        Map<User, Integer> averageDuration = callController.getAverageDurationUser();
         Assert.assertNotNull(averageDuration);
     }
 
@@ -126,7 +128,4 @@ public class TestAbonent {
         Assert.assertTrue(abonentController.createAbonent(abonent));
         abonentController.deleteAbonent(abonent);
     }
-
-
-
 }

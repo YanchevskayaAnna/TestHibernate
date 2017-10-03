@@ -75,7 +75,7 @@ public class User extends _IDEntity{
                 "login='" + login + '\'' +
                 ", pass='" + pass + '\'' +
                 ", userType=" + userType +
-                ", abonentList=" + abonentList +
+                ", abonentList=" + abonentList.size() +
                 '}';
     }
 

@@ -47,10 +47,11 @@ public class Abonent extends _IDEntity{
     @Override
     public String toString() {
         return "Abonent{" +
-                "name='" + name + '\'' +
+                "id=" + getId() +
+                ", name='" + name + '\'' +
                 ", user=" + user +
-                ", serviceList=" + serviceList +
-                ", paymentList=" + paymentList +
+//                ", serviceList=" + serviceList +
+//                ", paymentList=" + paymentList +
                 '}';
     }
 

@@ -105,6 +105,21 @@ public class TestAbonent {
     }
 
     @Test
+    public void getAverageDurationUserDate() {
+        Map<User, Integer> averageDuration = callController.getAverageDurationUser(new Date(1000), new Date(6000));
+        Assert.assertNotNull(averageDuration);
+    }
+
+    @Test
+    public void getAverageDurationAbonent() {
+//     User user = new User("user1", "1qaz2wsx3edc", UserType.USER);
+//     user.setid(????) Метода нет!!!
+//     Abonent abonent = new Abonent("abonent_user1", user)
+//     int averageDuration = callController.getAverageDuration(abonent);
+//     Assert.assertNotNull(averageDuration);
+    }
+
+    @Test
     public void getAbonentByID() {
         Abonent abonent = abonentController.getAbonentById(1);
         Assert.assertNotNull(abonent);

@@ -20,12 +20,26 @@ public class CallDao extends AbstractDAO<Call> implements iCallDao {
 
     @Override
     public int getAverageDuration(Abonent abonent) {
-        return 0;
+
+        EntityManager em = factory.createEntityManager();
+        String queryString = "SELECT AVG(m.duration) FROM Call m WHERE m.abonent = :abonent";
+        TypedQuery<Double> query = em.createQuery(queryString, Double.class);
+        query.setParameter("abonent", abonent);
+        return  query.getSingleResult().intValue();
+
     }
 
     @Override
     public int getAverageDuration(Abonent abonent, Date dateFrom, Date dateTo) {
-        return 0;
+
+        EntityManager em = factory.createEntityManager();
+        String queryString = "SELECT AVG(m.duration) FROM Call m WHERE m.abonent = :abonent and  m.date >= :dateFrom and m.date <= :dateTo";
+        TypedQuery<Double> query = em.createQuery(queryString, Double.class);
+        query.setParameter("abonent", abonent);
+        query.setParameter("dateFrom", dateFrom);
+        query.setParameter("dateTo",   dateTo);
+        return  query.getSingleResult().intValue();
+
     }
 
     @Override
@@ -79,6 +93,19 @@ public class CallDao extends AbstractDAO<Call> implements iCallDao {
 
     @Override
     public Map<User, Integer> getAverageDurationUser(Date dateFrom, Date dateTo) {
-        return null;
+
+        EntityManager em = factory.createEntityManager();
+        String queryString = "SELECT a.user,  AVG(c.duration) FROM Call c join c.abonent a WHERE c.date >= :dateFrom and c.date <= :dateTo GROUP BY a.user";
+        TypedQuery<Object[]> query = em.createQuery(queryString, Object[].class);
+        query.setParameter("dateFrom", dateFrom);
+        query.setParameter("dateTo",   dateTo);
+        List<Object[]> resultList = query.getResultList();
+
+        HashMap<User, Integer> map = new HashMap<User, Integer>();
+
+        for (int i = 0; i < resultList.size(); i++) {
+            map.put((User) resultList.get(i)[0], ((Double) resultList.get(i)[1]).intValue());
+        }
+        return map;
     }
 }

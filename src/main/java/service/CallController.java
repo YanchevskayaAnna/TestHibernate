@@ -47,8 +47,20 @@ public class CallController {
         return callDAO.getAverageDuration(dateFrom, dateTo);
     }
 
+    public Map<User, Integer> getAverageDurationUser(Date dateFrom, Date dateTo){
+        return callDAO.getAverageDurationUser(dateFrom, dateTo);
+    }
+
     public Map<User, Integer> getAverageDurationUser(){
         return callDAO.getAverageDurationUser();
+    }
+
+    public int getAverageDuration(Abonent abonent, Date dateFrom, Date dateTo) {
+        return callDAO.getAverageDuration(abonent, dateFrom, dateTo);
+    }
+
+    public int getAverageDuration(Abonent abonent) {
+        return callDAO.getAverageDuration(abonent);
     }
 
 }

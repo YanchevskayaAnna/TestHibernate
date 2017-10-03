@@ -56,10 +56,10 @@ public class Payment extends _IDEntity{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Payment)) return false;
-        if (!super.equals(o)) return false;
 
         Payment payment = (Payment) o;
 
+        if (id != null ? !id.equals(payment.id) : payment.id != null) return false;
         if (value != payment.value) return false;
         if (abonent != null ? !abonent.equals(payment.abonent) : payment.abonent != null) return false;
         return paymentDay != null ? paymentDay.equals(payment.paymentDay) : payment.paymentDay == null;

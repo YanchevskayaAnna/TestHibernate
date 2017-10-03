@@ -34,10 +34,9 @@ public class Abonent extends _IDEntity{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Abonent)) return false;
-        if (!super.equals(o)) return false;
 
         Abonent abonent = (Abonent) o;
-
+        if (id != null ? !id.equals(abonent.id) : abonent.id != null) return false;
         if (name != null ? !name.equals(abonent.name) : abonent.name != null) return false;
         if (user != null ? !user.equals(abonent.user) : abonent.user != null) return false;
         if (serviceList != null ? !serviceList.equals(abonent.serviceList) : abonent.serviceList != null) return false;

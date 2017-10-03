@@ -41,10 +41,9 @@ public class Service extends _IDEntity{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Service)) return false;
-        if (!super.equals(o)) return false;
-
         Service service = (Service) o;
 
+        if (id != null ? !id.equals(service.id) : service.id != null) return false;
         if (subscriptionFee != service.subscriptionFee) return false;
         return name != null ? name.equals(service.name) : service.name == null;
 

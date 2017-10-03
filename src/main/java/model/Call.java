@@ -68,10 +68,10 @@ public class Call extends _IDEntity{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Call)) return false;
-        if (!super.equals(o)) return false;
 
         Call call = (Call) o;
 
+        if (id != null ? !id.equals(call.id) : call.id != null) return false;
         if (duration != call.duration) return false;
         if (abonent != null ? !abonent.equals(call.abonent) : call.abonent != null) return false;
         if (callType != call.callType) return false;

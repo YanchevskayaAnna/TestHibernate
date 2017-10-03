@@ -59,10 +59,10 @@ public class User extends _IDEntity{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
 
         User user = (User) o;
 
+        if (id != null ? !id.equals(user.id) : user.id != null) return false;
         if (login != null ? !login.equals(user.login) : user.login != null) return false;
         if (pass != null ? !pass.equals(user.pass) : user.pass != null) return false;
         return userType == user.userType;

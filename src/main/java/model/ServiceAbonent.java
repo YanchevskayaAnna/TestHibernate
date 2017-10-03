@@ -70,10 +70,10 @@ public class ServiceAbonent extends _IDEntity{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof ServiceAbonent)) return false;
-        if (!super.equals(o)) return false;
 
         ServiceAbonent that = (ServiceAbonent) o;
 
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (service != null ? !service.equals(that.service) : that.service != null) return false;
         if (abonent != null ? !abonent.equals(that.abonent) : that.abonent != null) return false;
         if (dateFrom != null ? !dateFrom.equals(that.dateFrom) : that.dateFrom != null) return false;

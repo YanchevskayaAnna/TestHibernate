@@ -72,7 +72,7 @@ public class AbstractDAO<E extends _IDEntity> implements iAbstractDAO<E> {
 
         try {
             transaction.begin();
-            em.merge(entity);
+            em.persist(entity);
             transaction.commit();
             LOGGER.info(nameClass + " was saved");
         } catch (Exception e) {

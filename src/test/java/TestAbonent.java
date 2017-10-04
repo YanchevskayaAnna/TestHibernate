@@ -56,9 +56,9 @@ public class TestAbonent {
             abonentController.createAbonent(abonent);
 
             //Calls
-            Call call1 = new Call(abonent, CallType.IN, "+380672173946", 32);
+            Call call1 = new Call(abonent, CallType.IN, "+380672173946", 32, new Date(5000));
             callController.createCall(call1);
-            Call call2 = new Call(abonent, CallType.OUT, "+380672173946", 32);
+            Call call2 = new Call(abonent, CallType.OUT, "+380672173946", 32, new Date(5000));
             callController.createCall(call2);
 
             //Payments

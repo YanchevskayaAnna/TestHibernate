@@ -47,16 +47,17 @@ public class Abonent extends _IDEntity{
     @Override
     public String toString() {
         return "Abonent{" +
+                "id='" + id + '\'' +
                 "name='" + name + '\'' +
                 ", user=" + user +
-                ", serviceList=" + serviceList +
-                ", paymentList=" + paymentList +
+//                ", serviceList=" + serviceList +
+//                ", paymentList=" + paymentList +
                 '}';
     }
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
+        int result = id.hashCode();
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (user != null ? user.hashCode() : 0);
         result = 31 * result + (serviceList != null ? serviceList.hashCode() : 0);

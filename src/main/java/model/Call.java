@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name="calls")
@@ -22,14 +23,18 @@ public class Call extends _IDEntity{
     @Column
     private int duration;
 
+    @Column
+    private Date date;
+
     public Call() {
     }
 
-    public Call(Abonent abonent, CallType callType, String corNumber, int duration) {
+    public Call(Abonent abonent, CallType callType, String corNumber, int duration, Date date) {
         this.abonent = abonent;
         this.callType = callType;
         this.corNumber = corNumber;
         this.duration = duration;
+        this.date = date;
     }
 
     public Abonent getAbonent() {
@@ -54,6 +59,14 @@ public class Call extends _IDEntity{
 
     public void setCorNumber(String corNumber) {
         this.corNumber = corNumber;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public int getDuration() {

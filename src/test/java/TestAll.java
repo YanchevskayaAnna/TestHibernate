@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import service.*;
+import service.interfaces.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,24 +15,24 @@ import java.util.*;
 
 public class TestAll {
 
-    private static AbonentController abonentController;
-    private static ServiceController serviceController;
-    private static UserController userController;
-    private static ServiceAbonentController serviceAbonentController;
-    private static CallController callController;
-    private static PaymentController paymentController;
+    private static AbonentService abonentService;
+    private static ServiceService serviceService;
+    private static UserService userService;
+    private static ServiceAbonentService serviceAbonentService;
+    private static CallService callService;
+    private static PaymentService paymentService;
     private static EntityManagerFactory emFactory;
 
     @BeforeClass
     public static void beforeClass() throws IOException {
 
         emFactory = Persistence.createEntityManagerFactory("hibernate-unit");
-        abonentController = new AbonentController(new SQLAbonentDaoImpl(emFactory));
-        serviceController = new ServiceController(new SQLServiceDaoImpl(emFactory));
-        userController = new UserController(new SQLUserDaoImpl(emFactory));
-        serviceAbonentController = new ServiceAbonentController(new SQLServiceAbonentDaoImpl(emFactory));
-        callController = new CallController(new SQLCallDaoImpl(emFactory));
-        paymentController = new PaymentController(new SQLPaymentDaoImpl(emFactory));
+        abonentService = new AbonentServiceImpl(new SQLAbonentDaoImpl(emFactory));
+        serviceService = new ServiceServiceImpl(new SQLServiceDaoImpl(emFactory));
+        userService = new UserServiceImpl(new SQLUserDaoImpl(emFactory));
+        serviceAbonentService = new ServiceAbonentServiceImpl(new SQLServiceAbonentDaoImpl(emFactory));
+        callService = new CallServiceImpl(new SQLCallDaoImpl(emFactory));
+        paymentService = new PaymentServiceImpl(new SQLPaymentDaoImpl(emFactory));
         initDB();
     }
 
@@ -43,7 +44,7 @@ public class TestAll {
                 new Service("Call&Inet", 110)));
 
         serviceList.stream().forEach(service -> {
-            serviceController.createService(service);
+            serviceService.createService(service);
         });
 
         List<User> userList = new ArrayList<>(Arrays.asList(
@@ -52,28 +53,28 @@ public class TestAll {
                 new User("admin", "1qaz2wsx3edc", UserType.ADMIN)));
 
         userList.stream().forEach(user -> {
-            userController.createUser(user);
+            userService.createUser(user);
             //Abonent
             Abonent abonent = new Abonent("abonent_" + user.getLogin(), user);
-            abonentController.createAbonent(abonent);
+            abonentService.createAbonent(abonent);
 
             //Calls
             Call call1 = new Call(abonent, CallType.IN, "+380672173946", 32, new Date(5000));
-            callController.createCall(call1);
+            callService.createCall(call1);
             Call call2 = new Call(abonent, CallType.OUT, "+380672173946", 32, new Date(5000));
-            callController.createCall(call2);
+            callService.createCall(call2);
 
             //Payments
             Payment payment1 = new Payment(abonent, new Date(90000), 100);
-            paymentController.createPayment(payment1);
+            paymentService.createPayment(payment1);
 
             Payment payment2 = new Payment(abonent, new Date(10000), 100);
-            paymentController.createPayment(payment2);
+            paymentService.createPayment(payment2);
 
             //Servises
             serviceList.stream().forEach(service -> {
             ServiceAbonent serviceAbonent = new ServiceAbonent(service, abonent, new Date(55555), null);
-            serviceAbonentController.createServiceAbonent(serviceAbonent);});
+            serviceAbonentService.createServiceAbonent(serviceAbonent);});
 
         });
     }
@@ -85,7 +86,7 @@ public class TestAll {
 
     @Test
     public void getAllAbonents() {
-        List<Abonent> abonentList = abonentController.getAllAbonents();
+        List<Abonent> abonentList = abonentService.getAllAbonents();
         Assert.assertNotNull(abonentList);
     }
 
@@ -93,7 +94,7 @@ public class TestAll {
     public void getAverageDurationAbonent() {
        EntityManager em = emFactory.createEntityManager();
        Abonent abonent =  em.find(Abonent.class, 1);
-       Double averageDuration = callController.getAverageDuration(abonent);
+       Double averageDuration = callService.getAverageDuration(abonent);
        Assert.assertNotNull(averageDuration);
     }
 
@@ -101,37 +102,37 @@ public class TestAll {
     public void getAverageDurationAbonentDate() {
         EntityManager em = emFactory.createEntityManager();
         Abonent abonent =  em.find(Abonent.class, 1);
-        Double averageDuration = callController.getAverageDuration(abonent, new Date(1000), new Date(6000));
+        Double averageDuration = callService.getAverageDuration(abonent, new Date(1000), new Date(6000));
         Assert.assertNotNull(averageDuration);
     }
 
     @Test
     public void getAverageDuration() {
-        Map<Abonent, Integer> averageDuration = callController.getAverageDuration();
+        Map<Abonent, Integer> averageDuration = callService.getAverageDuration();
         Assert.assertNotNull(averageDuration);
     }
 
     @Test
     public void getAverageDurationDate() {
-        Map<Abonent, Integer> averageDuration = callController.getAverageDuration(new Date(1000), new Date(6000));
+        Map<Abonent, Integer> averageDuration = callService.getAverageDuration(new Date(1000), new Date(6000));
         Assert.assertNotNull(averageDuration);
     }
 
     @Test
     public void getAverageDurationUser() {
-        Map<User, Integer> averageDuration = callController.getAverageDurationUser();
+        Map<User, Integer> averageDuration = callService.getAverageDurationUser();
         Assert.assertNotNull(averageDuration);
     }
 
     @Test
     public void getAverageDurationUserDate() {
-        Map<User, Integer> averageDuration = callController.getAverageDurationUser(new Date(1000), new Date(6000));
+        Map<User, Integer> averageDuration = callService.getAverageDurationUser(new Date(1000), new Date(6000));
         Assert.assertNotNull(averageDuration);
     }
 
     @Test
     public void getAbonentByID() {
-        Abonent abonent = abonentController.getAbonentById(1);
+        Abonent abonent = abonentService.getAbonentById(1);
         Assert.assertNotNull(abonent);
     }
 
@@ -141,12 +142,12 @@ public class TestAll {
 
         Abonent testAbonent = new Abonent();
         testAbonent.setName("test abonent");
-        abonentController.createAbonent(testAbonent);
+        abonentService.createAbonent(testAbonent);
 
-        Abonent deleteAbonent = abonentController.getAbonentById(4);
-        abonentController.deleteAbonent(deleteAbonent);
+        Abonent deleteAbonent = abonentService.getAbonentById(4);
+        abonentService.deleteAbonent(deleteAbonent);
 
-        Assert.assertFalse(abonentController.getAllAbonents().contains(testAbonent));
+        Assert.assertFalse(abonentService.getAllAbonents().contains(testAbonent));
 
     }
 
@@ -156,7 +157,7 @@ public class TestAll {
         Abonent abonent = new Abonent();
         abonent.setName("Test2390");
 
-        Assert.assertTrue(abonentController.createAbonent(abonent));
-        abonentController.deleteAbonent(abonent);
+        Assert.assertTrue(abonentService.createAbonent(abonent));
+        abonentService.deleteAbonent(abonent);
     }
 }

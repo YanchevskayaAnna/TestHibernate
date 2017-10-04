@@ -1,15 +1,19 @@
 package service;
 
 import dao.interfaces.ServiceAbonentDao;
+import model.Abonent;
+import model.Service;
 import model.ServiceAbonent;
+import service.interfaces.ServiceAbonentService;
 
+import java.util.Date;
 import java.util.List;
 
-public class ServiceAbonentController {
+public class ServiceAbonentServiceImpl implements ServiceAbonentService{
 
     private ServiceAbonentDao serviceAbonentDao;
 
-    public ServiceAbonentController(ServiceAbonentDao serviceAbonentDao) {
+    public ServiceAbonentServiceImpl(ServiceAbonentDao serviceAbonentDao) {
         this.serviceAbonentDao = serviceAbonentDao;
     }
 
@@ -31,6 +35,11 @@ public class ServiceAbonentController {
 
     public boolean deleteServiceAbonent(ServiceAbonent serviceAbonent)   {
         return serviceAbonentDao.delete(serviceAbonent);
+    }
+
+    @Override
+    public List<Service> GetCurrentServices(Abonent abonent, Date date) {
+        return null;
     }
 
 }

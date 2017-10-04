@@ -3,14 +3,16 @@ package service;
 
 import dao.interfaces.UserDao;
 import model.User;
+import model.UserType;
+import service.interfaces.UserService;
 
 import java.util.List;
 
-public class UserController {
+public class UserServiceImpl implements UserService{
 
     private UserDao userDao;
 
-    public UserController(UserDao userDao) {
+    public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
     }
 
@@ -32,6 +34,11 @@ public class UserController {
 
     public boolean deleteUser(User user)   {
         return userDao.delete(user);
+    }
+
+    @Override
+    public List<User> getAllUsersWithUserType(UserType usertype, int start, int end) {
+        return null;
     }
 
 }

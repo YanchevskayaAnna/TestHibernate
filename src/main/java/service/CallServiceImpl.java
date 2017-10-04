@@ -5,16 +5,17 @@ import dao.interfaces.CallDao;
 import model.Abonent;
 import model.Call;
 import model.User;
+import service.interfaces.CallService;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public class CallController {
+public class CallServiceImpl implements CallService{
 
     private CallDao callDAO;
 
-    public CallController(CallDao callDAO) {
+    public CallServiceImpl(CallDao callDAO) {
         this.callDAO = callDAO;
     }
 

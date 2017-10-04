@@ -1,23 +1,26 @@
 package service;
 
 import dao.interfaces.ServiceDao;
+import model.Abonent;
 import model.Service;
+import service.interfaces.ServiceService;
 
+import java.util.Date;
 import java.util.List;
 
-public class ServiceController {
+public class ServiceServiceImpl implements ServiceService{
 
     private ServiceDao serviceDao;
 
-    public ServiceController(ServiceDao serviceDAO) {
+    public ServiceServiceImpl(ServiceDao serviceDAO) {
         this.serviceDao = serviceDAO;
     }
 
-    public List<Service> getAllAbonents() {
+    public List<Service> getAllServices() {
         return serviceDao.getAll();
     }
 
-    public Service getAbonentById(Integer id)  {
+    public Service getServiceById(Integer id)  {
         return serviceDao.getEntityById(id);
     }
 
@@ -31,6 +34,16 @@ public class ServiceController {
 
     public boolean deleteService(Service service)   {
         return serviceDao.delete(service);
+    }
+
+    @Override
+    public List<Abonent> getAllAbonentsWithService(Service service, int start, int end) {
+        return null;
+    }
+
+    @Override
+    public List<Abonent> getAllAbonentsWithServiceOnDate(Service service, Date date, int start, int end) {
+        return null;
     }
 
 }

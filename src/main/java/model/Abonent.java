@@ -16,10 +16,12 @@ public class Abonent extends _IDEntity{
             referencedColumnName = "id")
     private User user;
 
-    @OneToMany(mappedBy = "abonent", fetch = FetchType.LAZY)
+   @OneToMany(mappedBy = "abonent", fetch = FetchType.LAZY)
+   //@OneToMany(fetch = FetchType.LAZY) Если написать вот так, без ""mappedBy = abonent" то будет доп. таблица в SQL "abonents_servecesabonents"
     private List<ServiceAbonent> serviceList;
 
     @OneToMany(mappedBy = "abonent", fetch = FetchType.LAZY)
+    //@OneToMany(fetch = FetchType.LAZY)  Если написать вот так, без ""mappedBy = abonent" то будет доп. таблица в SQL "abonents_payments"
     private List<Payment> paymentList;
 
     public Abonent() {

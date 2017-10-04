@@ -1,5 +1,8 @@
 package model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -21,6 +24,24 @@ public class User extends _IDEntity{
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Abonent> abonentList;
+
+    /*Есть запрос: String queryString = "SELECT a.user,  AVG(c.duration) FROM Call c join c.abonent a  WHERE c.date >= :dateFrom and c.date <= :dateTo GROUP BY a.user";
+    Если написать:
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Abonent> abonentList;
+    то в базу данных удет сделано 4 запроса:
+    Hibernate: select abonent1_.user_id as col_0_0_, avg(call0_.duration) as col_1_0_, user2_.id as id1_5_, user2_.login as login2_5_, user2_.pass as pass3_5_, user2_.usertype as usertype4_5_ from calls call0_ inner join abonents abonent1_ on call0_.abonent_id=abonent1_.id inner join users user2_ on abonent1_.user_id=user2_.id where call0_.date>=? and call0_.date<=? group by abonent1_.user_id
+    Hibernate: select abonentlis0_.user_id as user3_5_1_, abonentlis0_.id as id1_0_1_, abonentlis0_.id as id1_0_0_, abonentlis0_.name as name2_0_0_, abonentlis0_.user_id as user3_0_0_ from abonents abonentlis0_ where abonentlis0_.user_id=?
+    Hibernate: select abonentlis0_.user_id as user3_5_1_, abonentlis0_.id as id1_0_1_, abonentlis0_.id as id1_0_0_, abonentlis0_.name as name2_0_0_, abonentlis0_.user_id as user3_0_0_ from abonents abonentlis0_ where abonentlis0_.user_id=?
+    Hibernate: select abonentlis0_.user_id as user3_5_1_, abonentlis0_.id as id1_0_1_, abonentlis0_.id as id1_0_0_, abonentlis0_.name as name2_0_0_, abonentlis0_.user_id as user3_0_0_ from abonents abonentlis0_ where abonentlis0_.user_id=?
+
+    Если написать:
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @Fetch(FetchMode.SELECT) ( по умолчанию - это предыдущий вариант   @Fetch(FetchMode.JOIN))
+    private List<Abonent> abonentList;
+    то в базу данных будет идти 1 запрос:
+    Hibernate: select abonent1_.user_id as col_0_0_, avg(call0_.duration) as col_1_0_, user2_.id as id1_5_, user2_.login as login2_5_, user2_.pass as pass3_5_, user2_.usertype as usertype4_5_ from calls call0_ inner join abonents abonent1_ on call0_.abonent_id=abonent1_.id inner join users user2_ on abonent1_.user_id=user2_.id where call0_.date>=? and call0_.date<=? group by abonent1_.user_id
+    */
 
     public User(String login, String pass, UserType userType) {
         this.login = login;

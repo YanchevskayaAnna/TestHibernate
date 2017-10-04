@@ -14,18 +14,33 @@ import java.util.List;
 import java.util.Map;
 
 public class CallDao extends AbstractDAO<Call> implements iCallDao {
+
     public CallDao(EntityManagerFactory factory) {
         super(factory, Call.class);
     }
 
     @Override
-    public int getAverageDuration(Abonent abonent) {
-        return 0;
+    public Double getAverageDuration(Abonent abonent) {
+
+        EntityManager em = factory.createEntityManager();
+        String queryString = "SELECT AVG(m.duration) FROM Call m  WHERE m.abonent = :abonent";
+        TypedQuery<Double> query = em.createQuery(queryString, Double.class);
+        query.setParameter("abonent",  abonent);
+
+        return query.getSingleResult();
     }
 
     @Override
-    public int getAverageDuration(Abonent abonent, Date dateFrom, Date dateTo) {
-        return 0;
+    public Double getAverageDuration(Abonent abonent, Date dateFrom, Date dateTo) {
+
+        EntityManager em = factory.createEntityManager();
+        String queryString = "SELECT AVG(m.duration) FROM Call m  WHERE m.date >= :dateFrom and m.date <= :dateTo and m.abonent = :abonent";
+        TypedQuery<Double> query = em.createQuery(queryString, Double.class);
+        query.setParameter("abonent",  abonent);
+        query.setParameter("dateFrom", dateFrom);
+        query.setParameter("dateTo",   dateTo);
+
+        return query.getSingleResult();
     }
 
     @Override
@@ -45,7 +60,19 @@ public class CallDao extends AbstractDAO<Call> implements iCallDao {
 
     @Override
     public Map<Abonent, Integer> getAverageDuration(Date dateFrom, Date dateTo) {
-        return null;
+
+        EntityManager em = factory.createEntityManager();
+        String queryString = "SELECT m.abonent,  AVG(m.duration) FROM Call m  WHERE m.date >= :dateFrom and m.date <= :dateTo GROUP BY m.abonent";
+        TypedQuery<Object[]> query = em.createQuery(queryString, Object[].class);
+        query.setParameter("dateFrom", dateFrom);
+        query.setParameter("dateTo",   dateTo);
+        List<Object[]> resultList = query.getResultList();
+        HashMap<Abonent, Integer> map = new HashMap<Abonent, Integer>();
+
+        for (int i = 0; i < resultList.size(); i++) {
+            map.put((Abonent) resultList.get(i)[0], ((Double) resultList.get(i)[1]).intValue());
+        }
+        return map;
     }
 
     @Override
@@ -65,6 +92,19 @@ public class CallDao extends AbstractDAO<Call> implements iCallDao {
 
     @Override
     public Map<User, Integer> getAverageDurationUser(Date dateFrom, Date dateTo) {
-        return null;
+
+        EntityManager em = factory.createEntityManager();
+        String queryString = "SELECT a.user,  AVG(c.duration) FROM Call c join c.abonent a  WHERE c.date >= :dateFrom and c.date <= :dateTo GROUP BY a.user";
+        TypedQuery<Object[]> query = em.createQuery(queryString, Object[].class);
+        query.setParameter("dateFrom", dateFrom);
+        query.setParameter("dateTo",   dateTo);
+        List<Object[]> resultList = query.getResultList();
+
+        HashMap<User, Integer> map = new HashMap<User, Integer>();
+
+        for (int i = 0; i < resultList.size(); i++) {
+            map.put((User) resultList.get(i)[0], ((Double) resultList.get(i)[1]).intValue());
+        }
+        return map;
     }
 }

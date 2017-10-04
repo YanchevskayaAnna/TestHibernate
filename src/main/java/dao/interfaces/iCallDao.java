@@ -9,8 +9,8 @@ import java.util.Map;
 
 public interface iCallDao extends iAbstractDAO<Call>{
 
-    public int getAverageDuration(Abonent abonent);
-    public int getAverageDuration(Abonent abonent, Date dateFrom, Date dateTo);
+    public Double getAverageDuration(Abonent abonent);
+    public Double getAverageDuration(Abonent abonent, Date dateFrom, Date dateTo);
     public Map<Abonent, Integer> getAverageDuration();
     public Map<Abonent, Integer> getAverageDuration(Date dateFrom, Date dateTo);
     public Map<User, Integer> getAverageDurationUser();

@@ -6,6 +6,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import service.*;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.io.IOException;
@@ -35,6 +36,7 @@ public class TestAbonent {
     }
 
     public static void initDB(){
+
         List<Service> serviceList = new ArrayList<>(Arrays.asList(
                 new Service("Call", 100),
                 new Service("Inet", 50),
@@ -72,6 +74,7 @@ public class TestAbonent {
             serviceList.stream().forEach(service -> {
             ServiceAbonent serviceAbonent = new ServiceAbonent(service, abonent, new Date(55555), null);
             serviceAbonentController.createServiceAbonent(serviceAbonent);});
+
         });
     }
 
@@ -87,14 +90,42 @@ public class TestAbonent {
     }
 
     @Test
+    public void getAverageDurationAbonent() {
+       EntityManager em = emFactory.createEntityManager();
+       Abonent abonent =  em.find(Abonent.class, 1);
+       Double averageDuration = callController.getAverageDuration(abonent);
+       Assert.assertNotNull(averageDuration);
+    }
+
+    @Test
+    public void getAverageDurationAbonentDate() {
+        EntityManager em = emFactory.createEntityManager();
+        Abonent abonent =  em.find(Abonent.class, 1);
+        Double averageDuration = callController.getAverageDuration(abonent, new Date(1000), new Date(6000));
+        Assert.assertNotNull(averageDuration);
+    }
+
+    @Test
     public void getAverageDuration() {
         Map<Abonent, Integer> averageDuration = callController.getAverageDuration();
         Assert.assertNotNull(averageDuration);
     }
 
     @Test
+    public void getAverageDurationDate() {
+        Map<Abonent, Integer> averageDuration = callController.getAverageDuration(new Date(1000), new Date(6000));
+        Assert.assertNotNull(averageDuration);
+    }
+
+    @Test
     public void getAverageDurationUser() {
         Map<User, Integer> averageDuration = callController.getAverageDurationUser();
+        Assert.assertNotNull(averageDuration);
+    }
+
+    @Test
+    public void getAverageDurationUserDate() {
+        Map<User, Integer> averageDuration = callController.getAverageDurationUser(new Date(1000), new Date(6000));
         Assert.assertNotNull(averageDuration);
     }
 
@@ -110,9 +141,9 @@ public class TestAbonent {
 
         Abonent testAbonent = new Abonent();
         testAbonent.setName("test abonent");
-//        abonentController.createAbonent(testAbonent);
+        abonentController.createAbonent(testAbonent);
 
-        Abonent deleteAbonent = abonentController.getAbonentById(3);
+        Abonent deleteAbonent = abonentController.getAbonentById(4);
         abonentController.deleteAbonent(deleteAbonent);
 
         Assert.assertFalse(abonentController.getAllAbonents().contains(testAbonent));

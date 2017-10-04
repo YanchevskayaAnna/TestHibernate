@@ -1,9 +1,7 @@
 package service;
 
 
-import dao.AbonentDao;
-import dao.UserDao;
-import model.Abonent;
+import dao.interfaces.UserDao;
 import model.User;
 
 import java.util.List;

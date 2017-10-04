@@ -3,7 +3,7 @@ package dao.interfaces;
 import model._IDEntity;
 import java.util.List;
 
-public interface iAbstractDAO<E extends _IDEntity> {
+public interface AbstractDAO<E extends _IDEntity> {
 
     public List<E> getAll();
 

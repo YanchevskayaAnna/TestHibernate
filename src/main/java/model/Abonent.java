@@ -50,8 +50,6 @@ public class Abonent extends _IDEntity{
                 "id='" + id + '\'' +
                 "name='" + name + '\'' +
                 ", user=" + user +
-//                ", serviceList=" + serviceList +
-//                ", paymentList=" + paymentList +
                 '}';
     }
 

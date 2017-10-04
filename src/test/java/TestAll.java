@@ -1,4 +1,4 @@
-import dao.*;
+import dao.SQLDao.*;
 import model.*;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -12,7 +12,7 @@ import javax.persistence.Persistence;
 import java.io.IOException;
 import java.util.*;
 
-public class TestAbonent {
+public class TestAll {
 
     private static AbonentController abonentController;
     private static ServiceController serviceController;
@@ -26,12 +26,12 @@ public class TestAbonent {
     public static void beforeClass() throws IOException {
 
         emFactory = Persistence.createEntityManagerFactory("hibernate-unit");
-        abonentController = new AbonentController(new AbonentDao(emFactory));
-        serviceController = new ServiceController(new ServiceDao(emFactory));
-        userController = new UserController(new UserDao(emFactory));
-        serviceAbonentController = new ServiceAbonentController(new ServiceAbonentDao(emFactory));
-        callController = new CallController(new CallDao(emFactory));
-        paymentController = new PaymentController(new PaymentDao(emFactory));
+        abonentController = new AbonentController(new SQLAbonentDaoImpl(emFactory));
+        serviceController = new ServiceController(new SQLServiceDaoImpl(emFactory));
+        userController = new UserController(new SQLUserDaoImpl(emFactory));
+        serviceAbonentController = new ServiceAbonentController(new SQLServiceAbonentDaoImpl(emFactory));
+        callController = new CallController(new SQLCallDaoImpl(emFactory));
+        paymentController = new PaymentController(new SQLPaymentDaoImpl(emFactory));
         initDB();
     }
 

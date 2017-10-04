@@ -7,7 +7,7 @@ import model.User;
 import java.util.Date;
 import java.util.Map;
 
-public interface iCallDao extends iAbstractDAO<Call>{
+public interface CallDao extends AbstractDAO<Call> {
 
     public Double getAverageDuration(Abonent abonent);
     public Double getAverageDuration(Abonent abonent, Date dateFrom, Date dateTo);

@@ -1,15 +1,15 @@
-package dao;
+package dao.SQLDao;
 
-import dao.interfaces.iUserDao;
+import dao.interfaces.UserDao;
 import model.User;
 import model.UserType;
 
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
-public class UserDao extends AbstractDAO<User> implements iUserDao {
+public class SQLUserDaoImpl extends SQLAbstractDAOImpl<User> implements UserDao {
 
-    public UserDao(EntityManagerFactory factory) {
+    public SQLUserDaoImpl(EntityManagerFactory factory) {
         super(factory, User.class);
     }
 

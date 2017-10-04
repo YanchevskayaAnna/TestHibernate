@@ -1,15 +1,15 @@
-package dao;
+package dao.SQLDao;
 
-import dao.interfaces.iAbonentDao;
+import dao.interfaces.AbonentDao;
 import model.Abonent;
 
 import javax.persistence.EntityManagerFactory;
 import java.util.Date;
 
 
-public class AbonentDao extends AbstractDAO<Abonent> implements iAbonentDao {
+public class SQLAbonentDaoImpl extends SQLAbstractDAOImpl<Abonent> implements AbonentDao {
 
-    public AbonentDao(EntityManagerFactory factory) {
+    public SQLAbonentDaoImpl(EntityManagerFactory factory) {
         super(factory, Abonent.class);
     }
 

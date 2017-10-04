@@ -1,9 +1,7 @@
 package service;
 
 
-import dao.CallDao;
-import dao.PaymentDao;
-import model.Call;
+import dao.interfaces.PaymentDao;
 import model.Payment;
 
 import java.util.List;

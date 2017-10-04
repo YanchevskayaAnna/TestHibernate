@@ -1,4 +1,4 @@
-package dao;
+package dao.SQLDao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -6,20 +6,20 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-import dao.interfaces.iAbstractDAO;
+import dao.interfaces.AbstractDAO;
 import model._IDEntity;
 import org.apache.log4j.Logger;
 
 
-public class AbstractDAO<E extends _IDEntity> implements iAbstractDAO<E> {
+public class SQLAbstractDAOImpl<E extends _IDEntity> implements AbstractDAO<E> {
 
     private Class<E> entityClass;
     private String nameClass;
     protected EntityManagerFactory factory;
-    private static final Logger LOGGER = Logger.getLogger(AbstractDAO.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(SQLAbstractDAOImpl.class.getName());
     //Сделать try finally через лямбду, передавать метод как параметр
 
-    public AbstractDAO(EntityManagerFactory factory, Class<E> entityClass) {
+    public SQLAbstractDAOImpl(EntityManagerFactory factory, Class<E> entityClass) {
         this.factory = factory;
         this.entityClass = entityClass;
         this.nameClass = entityClass.getSimpleName();

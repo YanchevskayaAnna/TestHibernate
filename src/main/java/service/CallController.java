@@ -1,8 +1,7 @@
 package service;
 
 
-import dao.AbonentDao;
-import dao.CallDao;
+import dao.interfaces.CallDao;
 import model.Abonent;
 import model.Call;
 import model.User;

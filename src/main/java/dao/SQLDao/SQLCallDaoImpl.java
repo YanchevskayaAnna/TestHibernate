@@ -1,6 +1,6 @@
-package dao;
+package dao.SQLDao;
 
-import dao.interfaces.iCallDao;
+import dao.interfaces.CallDao;
 import model.Abonent;
 import model.Call;
 import model.User;
@@ -13,9 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CallDao extends AbstractDAO<Call> implements iCallDao {
+public class SQLCallDaoImpl extends SQLAbstractDAOImpl<Call> implements CallDao {
 
-    public CallDao(EntityManagerFactory factory) {
+    public SQLCallDaoImpl(EntityManagerFactory factory) {
         super(factory, Call.class);
     }
 

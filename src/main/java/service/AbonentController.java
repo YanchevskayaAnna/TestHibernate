@@ -1,7 +1,7 @@
 package service;
 
 
-import dao.AbonentDao;
+import dao.interfaces.AbonentDao;
 import model.Abonent;
 
 import java.util.List;
@@ -14,7 +14,7 @@ public class AbonentController {
         this.abonentDAO = abonentDAO;
     }
 
-    public List<Abonent> getAllAbonents() {
+    public List<Abonent> getAllAbonents()    {
         return abonentDAO.getAll();
     }
 

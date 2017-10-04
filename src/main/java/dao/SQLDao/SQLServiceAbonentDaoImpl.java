@@ -1,7 +1,7 @@
-package dao;
+package dao.SQLDao;
 
 
-import dao.interfaces.iServiceAbonentDao;
+import dao.interfaces.ServiceAbonentDao;
 import model.Abonent;
 import model.Service;
 import model.ServiceAbonent;
@@ -10,8 +10,8 @@ import javax.persistence.EntityManagerFactory;
 import java.util.Date;
 import java.util.List;
 
-public class ServiceAbonentDao extends AbstractDAO<ServiceAbonent> implements iServiceAbonentDao {
-    public ServiceAbonentDao(EntityManagerFactory factory) {
+public class SQLServiceAbonentDaoImpl extends SQLAbstractDAOImpl<ServiceAbonent> implements ServiceAbonentDao {
+    public SQLServiceAbonentDaoImpl(EntityManagerFactory factory) {
         super(factory, ServiceAbonent.class);
     }
 

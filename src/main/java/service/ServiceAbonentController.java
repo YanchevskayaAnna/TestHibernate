@@ -1,10 +1,6 @@
 package service;
 
-
-
-import dao.ServiceAbonentDao;
-import dao.ServiceDao;
-import model.Service;
+import dao.interfaces.ServiceAbonentDao;
 import model.ServiceAbonent;
 
 import java.util.List;

@@ -1,3 +1,5 @@
+package integration;
+
 import dao.SQLDao.*;
 import model.*;
 import org.junit.AfterClass;

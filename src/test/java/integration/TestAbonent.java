@@ -5,6 +5,7 @@ import dao.SQLDao.*;
 import model.Abonent;
 import model.User;
 import model.UserType;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import service.*;
@@ -36,6 +37,10 @@ public class TestAbonent {
         userService.createUser(user);
     }
 
+    @AfterClass
+    public static void afterClass()  {
+        emFactory.close();
+    }
 
     @Test
     public void testCreateAbonent() {

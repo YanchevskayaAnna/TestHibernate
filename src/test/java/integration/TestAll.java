@@ -93,6 +93,18 @@ public class TestAll {
     }
 
     @Test
+    public void getAveragePayment() {
+        Map<User, Integer> averagePayment = paymentService.getAveragePayment();
+        Assert.assertNotNull(averagePayment);
+    }
+
+    @Test
+    public void getAllPayments() {
+        Double allPayment = paymentService.getAllPayments(new Date(1000), new Date(15000));
+        Assert.assertNotNull(allPayment);
+    }
+
+    @Test
     public void getAverageDurationAbonent() {
        EntityManager em = emFactory.createEntityManager();
        Abonent abonent =  em.find(Abonent.class, 1);

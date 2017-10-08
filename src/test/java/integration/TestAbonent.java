@@ -39,6 +39,7 @@ public class TestAbonent {
 
     @AfterClass
     public static void afterClass()  {
+        em.close();
         emFactory.close();
     }
 

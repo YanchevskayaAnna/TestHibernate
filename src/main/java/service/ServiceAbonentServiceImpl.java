@@ -39,7 +39,7 @@ public class ServiceAbonentServiceImpl implements ServiceAbonentService{
 
     @Override
     public List<Service> GetCurrentServices(Abonent abonent, Date date) {
-        return null;
+        return serviceAbonentDao.GetCurrentServices(abonent, date);
     }
 
 }

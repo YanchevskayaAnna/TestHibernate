@@ -90,6 +90,17 @@ public class TestAll {
     public void getAllAbonents() {
         List<Abonent> abonentList = abonentService.getAllAbonents();
         Assert.assertNotNull(abonentList);
+        Assert.assertTrue(abonentList.size() > 0);
+    }
+
+    @Test
+    public void getCurrentServices() {
+        EntityManager em = emFactory.createEntityManager();
+        Abonent abonent =  em.find(Abonent.class, 1);
+        em.close();
+        List<Service> serviceList = serviceAbonentService.GetCurrentServices(abonent, new Date(60000));
+        Assert.assertNotNull(serviceList);
+        Assert.assertTrue(serviceList.size() > 0);
     }
 
     @Test
@@ -99,6 +110,8 @@ public class TestAll {
         em.close();
         List<Abonent> abonentList = serviceService.getAllAbonentsWithService(service);
         Assert.assertNotNull(abonentList);
+        Assert.assertTrue(abonentList.size() > 0);
+
     }
 
     @Test
@@ -108,12 +121,14 @@ public class TestAll {
         em.close();
         List<Abonent> abonentList = serviceService.getAllAbonentsWithServiceOnDate(service, new Date(70000));
         Assert.assertNotNull(abonentList);
+        Assert.assertTrue(abonentList.size() > 0);
     }
 
     @Test
     public void getAllUsersWithUserType() {
         List<User> userList = userService.getAllUsersWithUserType(UserType.ADMIN);
         Assert.assertNotNull(userList);
+        Assert.assertTrue(userList.size() > 0);
     }
 
     @Test

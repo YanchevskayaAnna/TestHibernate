@@ -31,8 +31,8 @@ public class SQLServiceDaoImpl extends SQLAbstractDAOImpl<Service> implements Se
     @Override
     public List<Abonent> getAllAbonentsWithServiceOnDate(Service service, Date date) {
         EntityManager em = factory.createEntityManager();
-//        String queryString = "SELECT sa.abonent FROM ServiceAbonent sa where sa.service = :service and sa.dateFrom <= :date and (sa.dateTo >= :date or sa.dateTo = :nulldate)";
-        String queryString = "SELECT sa.abonent FROM ServiceAbonent sa where sa.service = :service and sa.dateFrom <= :date";
+        String queryString = "SELECT sa.abonent FROM ServiceAbonent sa where sa.service = :service and sa.dateFrom <= :date and (sa.dateTo >= :date or sa.dateTo IS NULL)";
+//        String queryString = "SELECT sa.abonent FROM ServiceAbonent sa where sa.service = :service and sa.dateFrom <= :date";
         TypedQuery<Abonent> query = em.createQuery(queryString, Abonent.class);
         query.setParameter("service", service);
         query.setParameter("date", date);

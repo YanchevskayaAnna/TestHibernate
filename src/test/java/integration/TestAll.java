@@ -93,6 +93,24 @@ public class TestAll {
     }
 
     @Test
+    public void getAllAbonentsWithService(){
+        EntityManager em = emFactory.createEntityManager();
+        Service service =  em.find(Service.class, 1);
+        em.close();
+        List<Abonent> abonentList = serviceService.getAllAbonentsWithService(service);
+        Assert.assertNotNull(abonentList);
+    }
+
+    @Test
+    public void getAllAbonentsWithServiceOnDate(){
+        EntityManager em = emFactory.createEntityManager();
+        Service service =  em.find(Service.class, 1);
+        em.close();
+        List<Abonent> abonentList = serviceService.getAllAbonentsWithServiceOnDate(service, new Date(70000));
+        Assert.assertNotNull(abonentList);
+    }
+
+    @Test
     public void getAllUsersWithUserType() {
         List<User> userList = userService.getAllUsersWithUserType(UserType.ADMIN);
         Assert.assertNotNull(userList);
@@ -114,6 +132,7 @@ public class TestAll {
     public void getAverageDurationAbonent() {
        EntityManager em = emFactory.createEntityManager();
        Abonent abonent =  em.find(Abonent.class, 1);
+       em.close();
        Double averageDuration = callService.getAverageDuration(abonent);
        Assert.assertNotNull(averageDuration);
     }
@@ -122,6 +141,7 @@ public class TestAll {
     public void getAverageDurationAbonentDate() {
         EntityManager em = emFactory.createEntityManager();
         Abonent abonent =  em.find(Abonent.class, 1);
+        em.close();
         Double averageDuration = callService.getAverageDuration(abonent, new Date(1000), new Date(6000));
         Assert.assertNotNull(averageDuration);
     }

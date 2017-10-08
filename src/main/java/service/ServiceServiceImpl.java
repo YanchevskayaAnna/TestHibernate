@@ -37,13 +37,13 @@ public class ServiceServiceImpl implements ServiceService{
     }
 
     @Override
-    public List<Abonent> getAllAbonentsWithService(Service service, int start, int end) {
-        return null;
+    public List<Abonent> getAllAbonentsWithService(Service service) {
+        return serviceDao.getAllAbonentsWithService(service);
     }
 
     @Override
-    public List<Abonent> getAllAbonentsWithServiceOnDate(Service service, Date date, int start, int end) {
-        return null;
+    public List<Abonent> getAllAbonentsWithServiceOnDate(Service service, Date date) {
+        return serviceDao.getAllAbonentsWithServiceOnDate(service, date);
     }
 
 }

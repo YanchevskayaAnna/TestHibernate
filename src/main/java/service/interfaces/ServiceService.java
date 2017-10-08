@@ -18,6 +18,6 @@ public interface ServiceService {
 
     public boolean deleteService(Service service);
 
-    public List<Abonent> getAllAbonentsWithService(Service service, int start, int end);
-    public List<Abonent> getAllAbonentsWithServiceOnDate(Service service, Date date, int start, int end);
+    public List<Abonent> getAllAbonentsWithService(Service service);
+    public List<Abonent> getAllAbonentsWithServiceOnDate(Service service, Date date);
 }

@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface UserDao extends AbstractDAO<User> {
 
-    public List<User> getAllUsersWithUserType(UserType usertype, int start, int end);
+    public List<User> getAllUsersWithUserType(UserType usertype);
 }

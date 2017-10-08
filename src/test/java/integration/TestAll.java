@@ -93,6 +93,12 @@ public class TestAll {
     }
 
     @Test
+    public void getAllUsersWithUserType() {
+        List<User> userList = userService.getAllUsersWithUserType(UserType.ADMIN);
+        Assert.assertNotNull(userList);
+    }
+
+    @Test
     public void getAveragePayment() {
         Map<User, Integer> averagePayment = paymentService.getAveragePayment();
         Assert.assertNotNull(averagePayment);

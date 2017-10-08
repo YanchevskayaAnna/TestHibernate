@@ -42,7 +42,7 @@ public class AbonentServiceImpl implements AbonentService{
     }
 
     @Override
-    public int CalculateDabts(Abonent abonent, Date date) {
+    public int CalculateDebts(Abonent abonent, Date date) {
         return 0;
     }
 

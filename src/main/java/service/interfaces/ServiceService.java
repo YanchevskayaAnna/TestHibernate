@@ -19,5 +19,6 @@ public interface ServiceService {
     public boolean deleteService(Service service);
 
     public List<Abonent> getAllAbonentsWithService(Service service);
+
     public List<Abonent> getAllAbonentsWithServiceOnDate(Service service, Date date);
 }

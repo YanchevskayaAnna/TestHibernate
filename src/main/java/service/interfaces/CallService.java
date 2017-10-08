@@ -29,5 +29,6 @@ public interface CallService {
     public Map<User, Integer> getAverageDurationUser(Date dateFrom, Date dateTo);
 
     public Double getAverageDuration(Abonent abonent);
+
     public Double getAverageDuration(Abonent abonent, Date dateFrom, Date dateTo);
 }

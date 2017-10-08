@@ -20,5 +20,6 @@ public interface PaymentService {
     public boolean deletePayment(Payment payment);
 
     public Map<User, Integer> getAveragePayment();
+
     public Double getAllPayments (Date dateFrom, Date dateTo);
 }

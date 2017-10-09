@@ -94,6 +94,22 @@ public class TestAll {
     }
 
     @Test
+    public void calculateBalance() {
+        Abonent abonent =  abonentService.getAbonentById(1);
+        Integer balance = abonentService.CalculateBalance(abonent, new Date(999999999));
+        Assert.assertNotNull(balance);
+//        Assert.assertTrue(balance > 0);
+    }
+
+    @Test
+    public void calculateDebts() {
+        Abonent abonent =  abonentService.getAbonentById(1);
+        Integer debt = abonentService.CalculateDebts(abonent, new Date(999999999));
+        Assert.assertNotNull(debt);
+//        Assert.assertTrue(debt > 0);
+    }
+
+    @Test
     public void getCurrentServices() {
         Abonent abonent =  abonentService.getAbonentById(1);
         List<Service> serviceList = serviceAbonentService.GetCurrentServices(abonent, new Date(60000));

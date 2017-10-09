@@ -24,13 +24,11 @@ public class TestAbonent {
     private static AbonentService abonentService;
     private static UserService userService;
     private static EntityManagerFactory emFactory;
-    private static EntityManager em;
     private static User user;
 
     @BeforeClass
     public static void beforeClass() throws IOException {
         emFactory = Persistence.createEntityManagerFactory("hibernate-unit");
-        em = emFactory.createEntityManager();
         abonentService = new AbonentServiceImpl(new SQLAbonentDaoImpl(emFactory));
         userService = new UserServiceImpl(new SQLUserDaoImpl(emFactory));
         user = new User("test", "test", UserType.USER);
@@ -39,8 +37,7 @@ public class TestAbonent {
 
     @AfterClass
     public static void afterClass()  {
-        em.close();
-        emFactory.close();
+         emFactory.close();
     }
 
     @Test
@@ -48,7 +45,7 @@ public class TestAbonent {
 //        Abonent abonent = new Abonent("test create", new User("test create", "xxx", UserType.USER));
         Abonent abonent = new Abonent("test create", user);
         abonentService.createAbonent(abonent);
-        Abonent abonent1 = em.find(Abonent.class, abonent.getId());
+        Abonent abonent1 = abonentService.getAbonentById(abonent.getId());
         Assert.assertNotNull(abonent1);
     }
 
@@ -57,10 +54,10 @@ public class TestAbonent {
 //        Abonent abonent = new Abonent("test update", new User("test update", "xxx", UserType.USER));
         Abonent abonent = new Abonent("test update", user);
         abonentService.createAbonent(abonent);
-        Abonent abonent1 = em.find(Abonent.class, abonent.getId());
+        Abonent abonent1 = abonentService.getAbonentById(abonent.getId());
         abonent1.setName("update");
         abonentService.updateAbonent(abonent1);
-        Abonent updatedAbonent = em.find(Abonent.class, abonent1.getId());
+        Abonent updatedAbonent = abonentService.getAbonentById(abonent1.getId());
         Assert.assertNotNull(updatedAbonent);
         Assert.assertEquals("update", updatedAbonent.getName());
     }
@@ -70,10 +67,10 @@ public class TestAbonent {
 //        Abonent abonent = new Abonent("test delete", new User("test delete", "xxx", UserType.USER));
         Abonent abonent = new Abonent("test delete", user);
         abonentService.createAbonent(abonent);
-        Abonent abonent1 = em.find(Abonent.class, abonent.getId());
+        Abonent abonent1 = abonentService.getAbonentById(abonent.getId());
         Assert.assertNotNull(abonent1);
         abonentService.deleteAbonent(abonent);
-        Abonent deletedAbonent = em.find(Abonent.class, abonent.getId());
+        Abonent deletedAbonent = abonentService.getAbonentById(abonent.getId());
         Assert.assertNull(deletedAbonent);
     }
 

@@ -50,7 +50,7 @@ public class TestCall {
     public void testCreateCall() {
         Call call = new Call(abonent, CallType.IN, "xxx", 50, new Date(100000));
         callService.createCall(call);
-        Call call1 = em.find(Call.class, call.getId());
+        Call call1 = callService.getCallById(call.getId());
         Assert.assertNotNull(call1);
     }
 

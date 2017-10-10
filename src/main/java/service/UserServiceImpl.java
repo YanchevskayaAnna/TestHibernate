@@ -37,8 +37,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public List<User> getAllUsersWithUserType(UserType usertype, int start, int end) {
-        return null;
+    public List<User> getAllUsersWithUserType(UserType usertype) {
+        return userDao.getAllUsersWithUserType(usertype);
     }
 
 }

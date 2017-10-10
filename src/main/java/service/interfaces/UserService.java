@@ -17,5 +17,5 @@ public interface UserService {
 
     public boolean deleteUser(User user);
 
-    public List<User> getAllUsersWithUserType(UserType usertype, int start, int end);
+    public List<User> getAllUsersWithUserType(UserType usertype);
 }

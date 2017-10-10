@@ -8,5 +8,5 @@ import java.util.Map;
 
 public interface PaymentDao extends AbstractDAO<Payment> {
     public Map<User, Integer> getAveragePayment();
-    public int getAllPayments (Date dateFrom, Date dateTo);
+    public Double getAllPayments (Date dateFrom, Date dateTo);
 }

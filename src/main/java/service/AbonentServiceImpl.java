@@ -38,12 +38,12 @@ public class AbonentServiceImpl implements AbonentService{
 
     @Override
     public int CalculateBalance(Abonent abonent, Date date) {
-        return 0;
+        return abonentDAO.CalculateBalance(abonent, date);
     }
 
     @Override
-    public int CalculateDabts(Abonent abonent, Date date) {
-        return 0;
+    public int CalculateDebts(Abonent abonent, Date date) {
+        return abonentDAO.CalculateDebts(abonent, date);
     }
 
 }

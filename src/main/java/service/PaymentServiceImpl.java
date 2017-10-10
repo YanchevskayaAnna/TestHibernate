@@ -40,12 +40,12 @@ public class PaymentServiceImpl implements PaymentService{
 
     @Override
     public Map<User, Integer> getAveragePayment() {
-        return null;
+        return paymentDAO.getAveragePayment();
     }
 
     @Override
-    public int getAllPayments(Date dateFrom, Date dateTo) {
-        return 0;
+    public Double getAllPayments(Date dateFrom, Date dateTo) {
+        return paymentDAO.getAllPayments(dateFrom, dateTo);
     }
 
 }

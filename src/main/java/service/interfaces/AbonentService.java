@@ -18,6 +18,7 @@ public interface AbonentService {
     public boolean deleteAbonent(Abonent abonent);
 
     public int CalculateBalance (Abonent abonent, Date date);
-    public int CalculateDabts(Abonent abonent, Date date);
+
+    public int CalculateDebts(Abonent abonent, Date date);
 
 }

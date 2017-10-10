@@ -90,20 +90,79 @@ public class TestAll {
     public void getAllAbonents() {
         List<Abonent> abonentList = abonentService.getAllAbonents();
         Assert.assertNotNull(abonentList);
+        Assert.assertTrue(abonentList.size() > 0);
+    }
+
+    @Test
+    public void calculateBalance() {
+        Abonent abonent =  abonentService.getAbonentById(1);
+        Integer balance = abonentService.CalculateBalance(abonent, new Date(999999999));
+        Assert.assertNotNull(balance);
+//        Assert.assertTrue(balance > 0);
+    }
+
+    @Test
+    public void calculateDebts() {
+        Abonent abonent =  abonentService.getAbonentById(1);
+        Integer debt = abonentService.CalculateDebts(abonent, new Date(999999999));
+        Assert.assertNotNull(debt);
+//        Assert.assertTrue(debt > 0);
+    }
+
+    @Test
+    public void getCurrentServices() {
+        Abonent abonent =  abonentService.getAbonentById(1);
+        List<Service> serviceList = serviceAbonentService.GetCurrentServices(abonent, new Date(60000));
+        Assert.assertNotNull(serviceList);
+        Assert.assertTrue(serviceList.size() > 0);
+    }
+
+    @Test
+    public void getAllAbonentsWithService(){
+        Service service =  serviceService.getServiceById(1);
+        List<Abonent> abonentList = serviceService.getAllAbonentsWithService(service);
+        Assert.assertNotNull(abonentList);
+        Assert.assertTrue(abonentList.size() > 0);
+
+    }
+
+    @Test
+    public void getAllAbonentsWithServiceOnDate(){
+        Service service =  serviceService.getServiceById(1);
+        List<Abonent> abonentList = serviceService.getAllAbonentsWithServiceOnDate(service, new Date(70000));
+        Assert.assertNotNull(abonentList);
+        Assert.assertTrue(abonentList.size() > 0);
+    }
+
+    @Test
+    public void getAllUsersWithUserType() {
+        List<User> userList = userService.getAllUsersWithUserType(UserType.ADMIN);
+        Assert.assertNotNull(userList);
+        Assert.assertTrue(userList.size() > 0);
+    }
+
+    @Test
+    public void getAveragePayment() {
+        Map<User, Integer> averagePayment = paymentService.getAveragePayment();
+        Assert.assertNotNull(averagePayment);
+    }
+
+    @Test
+    public void getAllPayments() {
+        Double allPayment = paymentService.getAllPayments(new Date(1000), new Date(15000));
+        Assert.assertNotNull(allPayment);
     }
 
     @Test
     public void getAverageDurationAbonent() {
-       EntityManager em = emFactory.createEntityManager();
-       Abonent abonent =  em.find(Abonent.class, 1);
+       Abonent abonent =  abonentService.getAbonentById(1);
        Double averageDuration = callService.getAverageDuration(abonent);
        Assert.assertNotNull(averageDuration);
     }
 
     @Test
     public void getAverageDurationAbonentDate() {
-        EntityManager em = emFactory.createEntityManager();
-        Abonent abonent =  em.find(Abonent.class, 1);
+        Abonent abonent =  abonentService.getAbonentById(1);
         Double averageDuration = callService.getAverageDuration(abonent, new Date(1000), new Date(6000));
         Assert.assertNotNull(averageDuration);
     }

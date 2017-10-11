@@ -4,7 +4,7 @@ import model.Abonent;
 import model.Service;
 import model.ServiceAbonent;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ServiceAbonentService {
@@ -19,5 +19,5 @@ public interface ServiceAbonentService {
 
     public boolean deleteServiceAbonent(ServiceAbonent serviceAbonent)  ;
 
-    public List<Service> GetCurrentServices(Abonent abonent, Date date);
+    public List<Service> GetCurrentServices(Abonent abonent, LocalDate date);
 }

@@ -7,7 +7,7 @@ import model.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +33,7 @@ public class SQLPaymentDaoImpl extends SQLAbstractDAOImpl<Payment> implements Pa
     }
 
     @Override
-    public Double getAllPayments(Date dateFrom, Date dateTo) {
+    public Double getAllPayments(LocalDate dateFrom, LocalDate dateTo) {
 
         EntityManager em = factory.createEntityManager();
         String queryString = "SELECT SUM(p.value) FROM Payment p  WHERE p.paymentDay >= :dateFrom and p.paymentDay <= :dateTo";

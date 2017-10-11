@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.*;
 
 public class TestAll {
@@ -61,21 +62,21 @@ public class TestAll {
             abonentService.createAbonent(abonent);
 
             //Calls
-            Call call1 = new Call(abonent, CallType.IN, "+380672173946", 32, new Date(5000));
+            Call call1 = new Call(abonent, CallType.IN, "+380672173946", 32, LocalDate.of(2017,1,1));
             callService.createCall(call1);
-            Call call2 = new Call(abonent, CallType.OUT, "+380672173946", 32, new Date(5000));
+            Call call2 = new Call(abonent, CallType.OUT, "+380672173946", 32, LocalDate.of(2017,1,1));
             callService.createCall(call2);
 
             //Payments
-            Payment payment1 = new Payment(abonent, new Date(90000), 100);
+            Payment payment1 = new Payment(abonent, LocalDate.of(2017,2,1), 100);
             paymentService.createPayment(payment1);
 
-            Payment payment2 = new Payment(abonent, new Date(10000), 100);
+            Payment payment2 = new Payment(abonent,  LocalDate.of(2017,3,1), 100);
             paymentService.createPayment(payment2);
 
             //Servises
             serviceList.stream().forEach(service -> {
-            ServiceAbonent serviceAbonent = new ServiceAbonent(service, abonent, new Date(55555), null);
+            ServiceAbonent serviceAbonent = new ServiceAbonent(service, abonent, LocalDate.of(2017,1,1), null);
             serviceAbonentService.createServiceAbonent(serviceAbonent);});
 
         });
@@ -96,23 +97,23 @@ public class TestAll {
     @Test
     public void calculateBalance() {
         Abonent abonent =  abonentService.getAbonentById(1);
-        Integer balance = abonentService.CalculateBalance(abonent, new Date(999999999));
+        Integer balance = abonentService.CalculateBalance(abonent, LocalDate.now());
         Assert.assertNotNull(balance);
-//        Assert.assertTrue(balance > 0);
+        Assert.assertTrue(balance > 0);
     }
 
     @Test
     public void calculateDebts() {
         Abonent abonent =  abonentService.getAbonentById(1);
-        Integer debt = abonentService.CalculateDebts(abonent, new Date(999999999));
+        Integer debt = abonentService.CalculateDebts(abonent, LocalDate.now());
         Assert.assertNotNull(debt);
-//        Assert.assertTrue(debt > 0);
+        Assert.assertTrue(debt > 0);
     }
 
     @Test
     public void getCurrentServices() {
         Abonent abonent =  abonentService.getAbonentById(1);
-        List<Service> serviceList = serviceAbonentService.GetCurrentServices(abonent, new Date(60000));
+        List<Service> serviceList = serviceAbonentService.GetCurrentServices(abonent, LocalDate.now());
         Assert.assertNotNull(serviceList);
         Assert.assertTrue(serviceList.size() > 0);
     }
@@ -129,7 +130,7 @@ public class TestAll {
     @Test
     public void getAllAbonentsWithServiceOnDate(){
         Service service =  serviceService.getServiceById(1);
-        List<Abonent> abonentList = serviceService.getAllAbonentsWithServiceOnDate(service, new Date(70000));
+        List<Abonent> abonentList = serviceService.getAllAbonentsWithServiceOnDate(service, LocalDate.now());
         Assert.assertNotNull(abonentList);
         Assert.assertTrue(abonentList.size() > 0);
     }
@@ -149,7 +150,7 @@ public class TestAll {
 
     @Test
     public void getAllPayments() {
-        Double allPayment = paymentService.getAllPayments(new Date(1000), new Date(15000));
+        Double allPayment = paymentService.getAllPayments(LocalDate.of(2017, 1,1), LocalDate.of(2017, 10,1));
         Assert.assertNotNull(allPayment);
     }
 
@@ -163,7 +164,7 @@ public class TestAll {
     @Test
     public void getAverageDurationAbonentDate() {
         Abonent abonent =  abonentService.getAbonentById(1);
-        Double averageDuration = callService.getAverageDuration(abonent, new Date(1000), new Date(6000));
+        Double averageDuration = callService.getAverageDuration(abonent, LocalDate.of(2016,1,1), LocalDate.of(2018,1,1));
         Assert.assertNotNull(averageDuration);
     }
 
@@ -175,7 +176,7 @@ public class TestAll {
 
     @Test
     public void getAverageDurationDate() {
-        Map<Abonent, Integer> averageDuration = callService.getAverageDuration(new Date(1000), new Date(6000));
+        Map<Abonent, Integer> averageDuration = callService.getAverageDuration( LocalDate.of(2016,1,1), LocalDate.of(2018,1,1));
         Assert.assertNotNull(averageDuration);
     }
 
@@ -187,7 +188,7 @@ public class TestAll {
 
     @Test
     public void getAverageDurationUserDate() {
-        Map<User, Integer> averageDuration = callService.getAverageDurationUser(new Date(1000), new Date(6000));
+        Map<User, Integer> averageDuration = callService.getAverageDurationUser( LocalDate.of(2016,1,1), LocalDate.of(2018,1,1));
         Assert.assertNotNull(averageDuration);
     }
 

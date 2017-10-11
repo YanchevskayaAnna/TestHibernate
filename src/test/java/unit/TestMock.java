@@ -12,6 +12,7 @@ import service.ServiceServiceImpl;
 import service.interfaces.*;
 
 import javax.persistence.EntityManagerFactory;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -48,18 +49,18 @@ public class TestMock {
         Service serviceInet = new Service("Inet", 200);
         Service serviceCallInet = new Service("Call&Inet", 150);
         //services abonents
-        ServiceAbonent serviceCallUser = new ServiceAbonent(serviceCall, userAbonent, new Date(1000), null);
-        ServiceAbonent serviceInetUser = new ServiceAbonent(serviceInet, userAbonent, new Date(1000), null);
-        ServiceAbonent serviceCallInetUser = new ServiceAbonent(serviceCallInet, userAbonent, new Date(1000), null);
-        ServiceAbonent serviceCallAdmin = new ServiceAbonent(serviceCall, adminAbonent, new Date(1000), null);
-        ServiceAbonent serviceInetAdmin = new ServiceAbonent(serviceInet, adminAbonent, new Date(1000), null);
-        ServiceAbonent serviceCallInetAdmin = new ServiceAbonent(serviceCallInet, adminAbonent, new Date(1000), null);
+        ServiceAbonent serviceCallUser = new ServiceAbonent(serviceCall, userAbonent, LocalDate.of(2017, 1,1), null);
+        ServiceAbonent serviceInetUser = new ServiceAbonent(serviceInet, userAbonent, LocalDate.of(2017, 1,1), null);
+        ServiceAbonent serviceCallInetUser = new ServiceAbonent(serviceCallInet, userAbonent, LocalDate.of(2017, 1,1), null);
+        ServiceAbonent serviceCallAdmin = new ServiceAbonent(serviceCall, adminAbonent, LocalDate.of(2017, 1,1), null);
+        ServiceAbonent serviceInetAdmin = new ServiceAbonent(serviceInet, adminAbonent, LocalDate.of(2017, 1,1), null);
+        ServiceAbonent serviceCallInetAdmin = new ServiceAbonent(serviceCallInet, adminAbonent, LocalDate.of(2017, 1,1), null);
         //calls
-        Call callUser = new Call(userAbonent, CallType.IN, "999", 10, new Date(2000));
-        Call callAbonent = new Call(adminAbonent, CallType.IN, "999", 10, new Date(2000));
+        Call callUser = new Call(userAbonent, CallType.IN, "999", 10, LocalDate.of(2017, 1,1));
+        Call callAbonent = new Call(adminAbonent, CallType.IN, "999", 10, LocalDate.of(2017, 1,1));
         //payments
-        Payment paymentUser = new Payment(userAbonent, new Date(5000), 10000);
-        Payment paymentAdmin = new Payment(adminAbonent, new Date(15000), 20000);
+        Payment paymentUser = new Payment(userAbonent, LocalDate.of(2017, 1, 1), 10000);
+        Payment paymentAdmin = new Payment(adminAbonent, LocalDate.of(2017, 1, 1), 20000);
 
         AbonentDao abonentDao = mock(AbonentDao.class);
         CallDao callDao = mock(CallDao.class);

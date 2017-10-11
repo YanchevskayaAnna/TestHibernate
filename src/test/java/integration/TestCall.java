@@ -19,8 +19,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.io.IOException;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 
 public class TestCall {
     private static CallService callService;
@@ -48,7 +47,7 @@ public class TestCall {
 
     @Test
     public void testCreateCall() {
-        Call call = new Call(abonent, CallType.IN, "xxx", 50, new Date(100000));
+        Call call = new Call(abonent, CallType.IN, "xxx", 50, LocalDate.of(2017, 1,1));
         callService.createCall(call);
         Call call1 = callService.getCallById(call.getId());
         Assert.assertNotNull(call1);

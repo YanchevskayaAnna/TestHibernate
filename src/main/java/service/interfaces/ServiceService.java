@@ -3,7 +3,7 @@ package service.interfaces;
 import model.Abonent;
 import model.Service;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ServiceService {
@@ -20,5 +20,5 @@ public interface ServiceService {
 
     public List<Abonent> getAllAbonentsWithService(Service service);
 
-    public List<Abonent> getAllAbonentsWithServiceOnDate(Service service, Date date);
+    public List<Abonent> getAllAbonentsWithServiceOnDate(Service service, LocalDate date);
 }

@@ -4,12 +4,11 @@ package dao.SQLDao;
 import dao.interfaces.ServiceDao;
 import model.Abonent;
 import model.Service;
-import model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class SQLServiceDaoImpl extends SQLAbstractDAOImpl<Service> implements ServiceDao {
@@ -29,7 +28,7 @@ public class SQLServiceDaoImpl extends SQLAbstractDAOImpl<Service> implements Se
     }
 
     @Override
-    public List<Abonent> getAllAbonentsWithServiceOnDate(Service service, Date date) {
+    public List<Abonent> getAllAbonentsWithServiceOnDate(Service service, LocalDate date) {
         EntityManager em = factory.createEntityManager();
         String queryString = "SELECT sa.abonent FROM ServiceAbonent sa where sa.service = :service and sa.dateFrom <= :date and (sa.dateTo >= :date or sa.dateTo IS NULL)";
 //        String queryString = "SELECT sa.abonent FROM ServiceAbonent sa where sa.service = :service and sa.dateFrom <= :date";

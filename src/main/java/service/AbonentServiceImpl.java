@@ -5,7 +5,7 @@ import dao.interfaces.AbonentDao;
 import model.Abonent;
 import service.interfaces.AbonentService;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class AbonentServiceImpl implements AbonentService{
@@ -37,12 +37,12 @@ public class AbonentServiceImpl implements AbonentService{
     }
 
     @Override
-    public int CalculateBalance(Abonent abonent, Date date) {
+    public int CalculateBalance(Abonent abonent, LocalDate date) {
         return abonentDAO.CalculateBalance(abonent, date);
     }
 
     @Override
-    public int CalculateDebts(Abonent abonent, Date date) {
+    public int CalculateDebts(Abonent abonent, LocalDate date) {
         return abonentDAO.CalculateDebts(abonent, date);
     }
 

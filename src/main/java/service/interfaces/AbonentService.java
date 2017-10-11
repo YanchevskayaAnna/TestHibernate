@@ -2,7 +2,7 @@ package service.interfaces;
 
 import model.Abonent;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface AbonentService {
@@ -17,8 +17,8 @@ public interface AbonentService {
 
     public boolean deleteAbonent(Abonent abonent);
 
-    public int CalculateBalance (Abonent abonent, Date date);
+    public int CalculateBalance (Abonent abonent, LocalDate date);
 
-    public int CalculateDebts(Abonent abonent, Date date);
+    public int CalculateDebts(Abonent abonent, LocalDate date);
 
 }

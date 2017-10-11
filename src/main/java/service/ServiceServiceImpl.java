@@ -5,7 +5,7 @@ import model.Abonent;
 import model.Service;
 import service.interfaces.ServiceService;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ServiceServiceImpl implements ServiceService{
@@ -42,7 +42,7 @@ public class ServiceServiceImpl implements ServiceService{
     }
 
     @Override
-    public List<Abonent> getAllAbonentsWithServiceOnDate(Service service, Date date) {
+    public List<Abonent> getAllAbonentsWithServiceOnDate(Service service, LocalDate date) {
         return serviceDao.getAllAbonentsWithServiceOnDate(service, date);
     }
 

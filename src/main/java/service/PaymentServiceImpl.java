@@ -6,7 +6,7 @@ import model.Payment;
 import model.User;
 import service.interfaces.PaymentService;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -44,7 +44,7 @@ public class PaymentServiceImpl implements PaymentService{
     }
 
     @Override
-    public Double getAllPayments(Date dateFrom, Date dateTo) {
+    public Double getAllPayments(LocalDate dateFrom, LocalDate dateTo) {
         return paymentDAO.getAllPayments(dateFrom, dateTo);
     }
 

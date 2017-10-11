@@ -1,7 +1,7 @@
 package model;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="calls")
@@ -24,12 +24,12 @@ public class Call extends _IDEntity{
     private int duration;
 
     @Column
-    private Date date;
+    private LocalDate date;
 
     public Call() {
     }
 
-    public Call(Abonent abonent, CallType callType, String corNumber, int duration, Date date) {
+    public Call(Abonent abonent, CallType callType, String corNumber, int duration, LocalDate date) {
         this.abonent = abonent;
         this.callType = callType;
         this.corNumber = corNumber;
@@ -61,11 +61,11 @@ public class Call extends _IDEntity{
         this.corNumber = corNumber;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

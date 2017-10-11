@@ -4,7 +4,7 @@ import model.Abonent;
 import model.Call;
 import model.User;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -22,13 +22,13 @@ public interface CallService {
 
     public Map<Abonent, Integer> getAverageDuration();
 
-    public Map<Abonent, Integer> getAverageDuration(Date dateFrom, Date dateTo);
+    public Map<Abonent, Integer> getAverageDuration(LocalDate dateFrom, LocalDate dateTo);
 
     public Map<User, Integer> getAverageDurationUser();
 
-    public Map<User, Integer> getAverageDurationUser(Date dateFrom, Date dateTo);
+    public Map<User, Integer> getAverageDurationUser(LocalDate dateFrom, LocalDate dateTo);
 
     public Double getAverageDuration(Abonent abonent);
 
-    public Double getAverageDuration(Abonent abonent, Date dateFrom, Date dateTo);
+    public Double getAverageDuration(Abonent abonent, LocalDate dateFrom, LocalDate dateTo);
 }

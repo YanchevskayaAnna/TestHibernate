@@ -7,7 +7,7 @@ import model.Call;
 import model.User;
 import service.interfaces.CallService;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +43,7 @@ public class CallServiceImpl implements CallService{
         return callDAO.getAverageDuration();
     }
 
-    public Map<Abonent, Integer> getAverageDuration(Date dateFrom, Date dateTo){
+    public Map<Abonent, Integer> getAverageDuration(LocalDate dateFrom, LocalDate dateTo){
         return callDAO.getAverageDuration(dateFrom, dateTo);
     }
 
@@ -51,14 +51,14 @@ public class CallServiceImpl implements CallService{
         return callDAO.getAverageDurationUser();
     }
 
-    public Map<User, Integer> getAverageDurationUser(Date dateFrom, Date dateTo){
+    public Map<User, Integer> getAverageDurationUser(LocalDate dateFrom, LocalDate dateTo){
         return callDAO.getAverageDurationUser(dateFrom, dateTo);
     }
 
     public Double getAverageDuration(Abonent abonent){
         return  callDAO.getAverageDuration(abonent);
     }
-    public Double getAverageDuration(Abonent abonent, Date dateFrom, Date dateTo){
+    public Double getAverageDuration(Abonent abonent, LocalDate dateFrom, LocalDate dateTo){
         return  callDAO.getAverageDuration(abonent, dateFrom, dateTo);
     }
 }

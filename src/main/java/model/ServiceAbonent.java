@@ -1,7 +1,7 @@
 package model;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="service_abonents")
@@ -19,12 +19,12 @@ public class ServiceAbonent extends _IDEntity{
     private Abonent abonent;
 
     @Column
-    private Date dateFrom;
+    private LocalDate dateFrom;
 
     @Column
-    private Date dateTo;
+    private LocalDate dateTo;
 
-    public ServiceAbonent(Service service, Abonent abonent, Date dateFrom, Date dateTo) {
+    public ServiceAbonent(Service service, Abonent abonent, LocalDate dateFrom, LocalDate dateTo) {
         this.service = service;
         this.abonent = abonent;
         this.dateFrom = dateFrom;
@@ -50,19 +50,19 @@ public class ServiceAbonent extends _IDEntity{
         this.abonent = abonent;
     }
 
-    public Date getDateFrom() {
+    public LocalDate getDateFrom() {
         return dateFrom;
     }
 
-    public void setDateFrom(Date dateFrom) {
+    public void setDateFrom(LocalDate dateFrom) {
         this.dateFrom = dateFrom;
     }
 
-    public Date getDateTo() {
+    public LocalDate getDateTo() {
         return dateTo;
     }
 
-    public void setDateTo(Date dateTo) {
+    public void setDateTo(LocalDate dateTo) {
         this.dateTo = dateTo;
     }
 

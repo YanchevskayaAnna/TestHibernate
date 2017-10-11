@@ -8,7 +8,7 @@ import model.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +31,7 @@ public class SQLCallDaoImpl extends SQLAbstractDAOImpl<Call> implements CallDao 
     }
 
     @Override
-    public Double getAverageDuration(Abonent abonent, Date dateFrom, Date dateTo) {
+    public Double getAverageDuration(Abonent abonent, LocalDate dateFrom, LocalDate dateTo) {
 
         EntityManager em = factory.createEntityManager();
         String queryString = "SELECT AVG(m.duration) FROM Call m  WHERE m.date >= :dateFrom and m.date <= :dateTo and m.abonent = :abonent";
@@ -59,7 +59,7 @@ public class SQLCallDaoImpl extends SQLAbstractDAOImpl<Call> implements CallDao 
     }
 
     @Override
-    public Map<Abonent, Integer> getAverageDuration(Date dateFrom, Date dateTo) {
+    public Map<Abonent, Integer> getAverageDuration(LocalDate dateFrom, LocalDate dateTo) {
 
         EntityManager em = factory.createEntityManager();
         String queryString = "SELECT m.abonent,  AVG(m.duration) FROM Call m  WHERE m.date >= :dateFrom and m.date <= :dateTo GROUP BY m.abonent";
@@ -91,7 +91,7 @@ public class SQLCallDaoImpl extends SQLAbstractDAOImpl<Call> implements CallDao 
     }
 
     @Override
-    public Map<User, Integer> getAverageDurationUser(Date dateFrom, Date dateTo) {
+    public Map<User, Integer> getAverageDurationUser(LocalDate dateFrom, LocalDate dateTo) {
 
         EntityManager em = factory.createEntityManager();
         String queryString = "SELECT a.user,  AVG(c.duration) FROM Call c join c.abonent a  WHERE c.date >= :dateFrom and c.date <= :dateTo GROUP BY a.user";

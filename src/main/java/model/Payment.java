@@ -1,7 +1,7 @@
 package model;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="payments")
@@ -14,7 +14,7 @@ public class Payment extends _IDEntity{
     private Abonent abonent;
 
     @Column
-    private Date paymentDay;
+    private LocalDate paymentDay;
 
     @Column
     private int value;
@@ -22,7 +22,7 @@ public class Payment extends _IDEntity{
     public Payment() {
     }
 
-    public Payment(Abonent abonent, Date paymentDay, int value) {
+    public Payment(Abonent abonent, LocalDate paymentDay, int value) {
         this.abonent = abonent;
         this.paymentDay = paymentDay;
         this.value = value;
@@ -36,11 +36,11 @@ public class Payment extends _IDEntity{
         this.abonent = abonent;
     }
 
-    public Date getPaymentDay() {
+    public LocalDate getPaymentDay() {
         return paymentDay;
     }
 
-    public void setPaymentDay(Date paymentDay) {
+    public void setPaymentDay(LocalDate paymentDay) {
         this.paymentDay = paymentDay;
     }
 

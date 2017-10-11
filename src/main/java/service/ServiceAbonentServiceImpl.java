@@ -6,7 +6,7 @@ import model.Service;
 import model.ServiceAbonent;
 import service.interfaces.ServiceAbonentService;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ServiceAbonentServiceImpl implements ServiceAbonentService{
@@ -38,7 +38,7 @@ public class ServiceAbonentServiceImpl implements ServiceAbonentService{
     }
 
     @Override
-    public List<Service> GetCurrentServices(Abonent abonent, Date date) {
+    public List<Service> GetCurrentServices(Abonent abonent, LocalDate date) {
         return serviceAbonentDao.GetCurrentServices(abonent, date);
     }
 

@@ -3,6 +3,7 @@ package service.interfaces;
 import model.Payment;
 import model.User;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -21,5 +22,5 @@ public interface PaymentService {
 
     public Map<User, Integer> getAveragePayment();
 
-    public Double getAllPayments (Date dateFrom, Date dateTo);
+    public Double getAllPayments (LocalDate dateFrom, LocalDate dateTo);
 }

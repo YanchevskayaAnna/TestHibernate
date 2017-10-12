@@ -2,6 +2,8 @@ package service;
 
 
 import dao.interfaces.UserDao;
+import exception.TableIsEmptyException;
+import model.Abonent;
 import model.User;
 import model.UserType;
 import service.interfaces.UserService;
@@ -39,6 +41,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<User> getAllUsersWithUserType(UserType usertype) {
         return userDao.getAllUsersWithUserType(usertype);
+    }
+
+    @Override
+    public List<Abonent> getAllAbonents(User user) throws TableIsEmptyException {
+        return userDao.getAllAbonents(user);
     }
 
 }

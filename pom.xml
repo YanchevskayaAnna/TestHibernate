@@ -69,6 +69,7 @@
         <mockito.version>1.9.5</mockito.version>
     </properties>
 
+    <build>
     <plugins>
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
@@ -80,5 +81,5 @@
             </configuration>
         </plugin>
     </plugins>
-
+    </build>
 </project>

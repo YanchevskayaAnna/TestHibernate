@@ -69,9 +69,18 @@ public class User extends _IDEntity{
         return pass;
     }
 
+    public List<Abonent> getAbonentList() {
+        return abonentList;
+    }
+
+    public void setAbonentList(List<Abonent> abonentList) {
+        this.abonentList = abonentList;
+    }
+
     public UserType getUserType() {
         return userType;
     }
+
     public void setUserType(UserType userType) {
         this.userType = userType;
     }

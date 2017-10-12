@@ -1,5 +1,7 @@
 package service.interfaces;
 
+import exception.TableIsEmptyException;
+import model.Abonent;
 import model.User;
 import model.UserType;
 
@@ -18,4 +20,6 @@ public interface UserService {
     public boolean deleteUser(User user);
 
     public List<User> getAllUsersWithUserType(UserType usertype);
+
+    public List<Abonent> getAllAbonents(User user) throws TableIsEmptyException;
 }

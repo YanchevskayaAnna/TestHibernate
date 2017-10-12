@@ -1,8 +1,11 @@
 package dao.SQLDao;
 
 import dao.interfaces.UserDao;
+import exception.TableIsEmptyException;
+import model.Abonent;
 import model.User;
 import model.UserType;
+import sun.awt.datatransfer.DataTransferer;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -25,4 +28,15 @@ public class SQLUserDaoImpl extends SQLAbstractDAOImpl<User> implements UserDao 
         query.setParameter("usertype", usertype);
         return query.getResultList();
     }
+
+    @Override
+    public List<Abonent> getAllAbonents(User user) throws TableIsEmptyException {
+        List<Abonent> resultlist = user.getAbonentList();
+        if (resultlist.size() == 0) {
+            throw new TableIsEmptyException("Current table is empty");
+        }
+        return resultlist;
+    }
+
+
 }

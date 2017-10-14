@@ -6,6 +6,7 @@ import exception.TableIsEmptyException;
 import model.Abonent;
 import model.User;
 import model.UserType;
+import model.auxiliary.AbonentInfo;
 import service.interfaces.UserService;
 
 import java.util.List;
@@ -46,6 +47,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<Abonent> getAllAbonents(User user) throws TableIsEmptyException {
         return userDao.getAllAbonents(user);
+    }
+
+    @Override
+    public List<AbonentInfo> getAllAbonentsWithInfo(User user) throws TableIsEmptyException {
+        return userDao.getAllAbonentsWithInfo(user);
     }
 
 }

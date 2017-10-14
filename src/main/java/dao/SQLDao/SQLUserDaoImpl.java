@@ -5,11 +5,14 @@ import exception.TableIsEmptyException;
 import model.Abonent;
 import model.User;
 import model.UserType;
+import model.auxiliary.AbonentInfo;
 import sun.awt.datatransfer.DataTransferer;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,6 +37,25 @@ public class SQLUserDaoImpl extends SQLAbstractDAOImpl<User> implements UserDao 
         List<Abonent> resultlist = user.getAbonentList();
         if (resultlist.size() == 0) {
             throw new TableIsEmptyException("Current table is empty");
+        }
+        return resultlist;
+    }
+
+    @Override
+    public List<AbonentInfo> getAllAbonentsWithInfo(User user) throws TableIsEmptyException {
+        List<Abonent> abonentlist = user.getAbonentList();
+        if (abonentlist.size() == 0) {
+            throw new TableIsEmptyException("Current table is empty");
+        }
+
+        List<AbonentInfo> resultlist = new ArrayList<>();
+        for (Abonent abonent: abonentlist){
+            AbonentInfo abonentInfo = new AbonentInfo();
+            abonentInfo.setAbonent(abonent);
+            abonentInfo.setType(user.getUserType());
+            abonentInfo.setServices(new SQLServiceAbonentDaoImpl(this.factory).GetCurrentServices(abonent, LocalDate.now()));
+            abonentInfo.setBalance(new SQLAbonentDaoImpl(this.factory).CalculateBalance(abonent, LocalDate.now()));
+            resultlist.add(abonentInfo);
         }
         return resultlist;
     }

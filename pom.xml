@@ -70,6 +70,7 @@
             <version>${mockito.version}</version>
         </dependency>
 
+
     </dependencies>
 
     <properties>
@@ -89,6 +90,7 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>

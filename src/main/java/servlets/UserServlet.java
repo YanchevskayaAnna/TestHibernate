@@ -1,5 +1,4 @@
 package servlets;
-
 import dao.SQLDao.*;
 import exception.TableIsEmptyException;
 import model.*;
@@ -100,3 +99,4 @@ public class UserServlet extends HttpServlet {
     }
 
 }
+

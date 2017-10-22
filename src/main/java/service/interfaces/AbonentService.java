@@ -17,8 +17,10 @@ public interface AbonentService {
 
     public boolean deleteAbonent(Abonent abonent);
 
-    public int CalculateBalance (Abonent abonent, LocalDate date);
+    public int calculateBalance (Abonent abonent, LocalDate date);
 
-    public int CalculateDebts(Abonent abonent, LocalDate date);
+    public int calculateDebts(Abonent abonent, LocalDate date);
+
+    public Abonent getAbonentByName(String nameAbonent);
 
 }

@@ -10,5 +10,5 @@ import java.util.List;
 
 public interface ServiceAbonentDao extends AbstractDAO<ServiceAbonent> {
 
-    public List<Service> GetCurrentServices(Abonent abonent, LocalDate date);
+    public List<Service> getCurrentServices(Abonent abonent, LocalDate date);
 }

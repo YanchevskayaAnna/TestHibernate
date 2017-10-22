@@ -18,7 +18,7 @@ public class SQLAbonentDaoImpl extends SQLAbstractDAOImpl<Abonent> implements Ab
     }
 
     @Override
-    public int CalculateBalance(Abonent abonent, LocalDate date) {
+    public int calculateBalance(Abonent abonent, LocalDate date) {
         EntityManager em = factory.createEntityManager();
         //Строим таблицу с полями Сервис Дата с - Дата по
         String queryString = "SELECT sa.service, s.subscriptionFee, sa.dateFrom, sa.dateTo FROM ServiceAbonent sa join sa.service s  WHERE sa.abonent = :abonent and sa.dateFrom <= :date";
@@ -47,14 +47,25 @@ public class SQLAbonentDaoImpl extends SQLAbstractDAOImpl<Abonent> implements Ab
         TypedQuery<Long> queryPaymemt = em.createQuery(queryString, Long.class);
         queryPaymemt.setParameter("date",  date);
         queryPaymemt.setParameter("abonent",  abonent);
-        Double payment = queryPaymemt.getSingleResult().doubleValue();
-
+        Double payment = 0.0;
+        if (queryPaymemt.getResultList().size() > 0) {payment = queryPaymemt.getSingleResult().doubleValue();}
         return (int) (summ - payment);
     }
 
     @Override
-    public int CalculateDebts(Abonent abonent, LocalDate date) {
-        Integer balance = CalculateBalance(abonent, date);
+    public int calculateDebts(Abonent abonent, LocalDate date) {
+        Integer balance = calculateBalance(abonent, date);
         return balance > 0 ? balance : 0;
+    }
+
+    @Override
+    public Abonent getAbonentByName(String nameAbonent){
+        EntityManager em = factory.createEntityManager();
+        //Строим таблицу с полями Сервис Дата с - Дата по
+        String queryString = "SELECT a FROM Abonent a  WHERE a.name = :name";
+        TypedQuery<Abonent> query = em.createQuery(queryString, Abonent.class);
+        query.setParameter("name",   nameAbonent);
+        return query.getSingleResult();
+
     }
 }

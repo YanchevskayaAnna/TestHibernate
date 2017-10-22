@@ -18,7 +18,7 @@ public class SQLServiceAbonentDaoImpl extends SQLAbstractDAOImpl<ServiceAbonent>
     }
 
     @Override
-    public List<Service> GetCurrentServices(Abonent abonent, LocalDate date) {
+    public List<Service> getCurrentServices(Abonent abonent, LocalDate date) {
         EntityManager em = factory.createEntityManager();
         String queryString = "SELECT sa.service FROM ServiceAbonent sa where sa.abonent = :abonent and sa.dateFrom <= :date and (sa.dateTo >= :date or sa.dateTo IS NULL)";
 //      String queryString = "SELECT sa.service FROM ServiceAbonent sa where sa.abonent = :abonent and sa.dateFrom <= :date";

@@ -37,13 +37,18 @@ public class AbonentServiceImpl implements AbonentService{
     }
 
     @Override
-    public int CalculateBalance(Abonent abonent, LocalDate date) {
-        return abonentDAO.CalculateBalance(abonent, date);
+    public int calculateBalance(Abonent abonent, LocalDate date) {
+        return abonentDAO.calculateBalance(abonent, date);
     }
 
     @Override
-    public int CalculateDebts(Abonent abonent, LocalDate date) {
-        return abonentDAO.CalculateDebts(abonent, date);
+    public int calculateDebts(Abonent abonent, LocalDate date) {
+        return abonentDAO.calculateDebts(abonent, date);
+    }
+
+    @Override
+    public Abonent getAbonentByName(String nameAbonent) {
+        return abonentDAO.getAbonentByName(nameAbonent);
     }
 
 }

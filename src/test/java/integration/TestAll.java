@@ -96,26 +96,26 @@ public class TestAll {
 
     @Test
     public void calculateBalance() {
-//        Abonent abonent =  abonentService.getAbonentById(1);
-//        Integer balance = abonentService.CalculateBalance(abonent, LocalDate.now());
-//        Assert.assertNotNull(balance);
-//        Assert.assertTrue(balance > 0);
+        Abonent abonent =  abonentService.getAbonentByName("abonent_user1");
+        Integer balance = abonentService.calculateBalance(abonent, LocalDate.now());
+        Assert.assertNotNull(balance);
+        Assert.assertTrue(balance > 0);
     }
 
     @Test
     public void calculateDebts() {
-//        Abonent abonent =  abonentService.getAbonentById(1);
-//        Integer debt = abonentService.CalculateDebts(abonent, LocalDate.now());
-//        Assert.assertNotNull(debt);
-//        Assert.assertTrue(debt > 0);
+        Abonent abonent =  abonentService.getAbonentByName("abonent_user1");
+        Integer debt = abonentService.calculateDebts(abonent, LocalDate.now());
+        Assert.assertNotNull(debt);
+        Assert.assertTrue(debt > 0);
     }
 
     @Test
     public void getCurrentServices() {
-//        Abonent abonent =  abonentService.getAbonentById(1);
-//        List<Service> serviceList = serviceAbonentService.GetCurrentServices(abonent, LocalDate.now());
-//        Assert.assertNotNull(serviceList);
-//        Assert.assertTrue(serviceList.size() > 0);
+        Abonent abonent =  abonentService.getAbonentByName("abonent_user1");
+        List<Service> serviceList = serviceAbonentService.getCurrentServices(abonent, LocalDate.now());
+        Assert.assertNotNull(serviceList);
+        Assert.assertTrue(serviceList.size() > 0);
     }
 
     @Test
@@ -156,16 +156,16 @@ public class TestAll {
 
     @Test
     public void getAverageDurationAbonent() {
-//       Abonent abonent =  abonentService.getAbonentById(1);
-//       Double averageDuration = callService.getAverageDuration(abonent);
-//       Assert.assertNotNull(averageDuration);
+       Abonent abonent =  abonentService.getAbonentByName("abonent_user1");
+       Double averageDuration = callService.getAverageDuration(abonent);
+       Assert.assertNotNull(averageDuration);
     }
 
     @Test
     public void getAverageDurationAbonentDate() {
-//        Abonent abonent =  abonentService.getAbonentById(1);
-//        Double averageDuration = callService.getAverageDuration(abonent, LocalDate.of(2016,1,1), LocalDate.of(2018,1,1));
-//        Assert.assertNotNull(averageDuration);
+        Abonent abonent =  abonentService.getAbonentByName("abonent_user1");
+        Double averageDuration = callService.getAverageDuration(abonent, LocalDate.of(2016,1,1), LocalDate.of(2018,1,1));
+        Assert.assertNotNull(averageDuration);
     }
 
     @Test
@@ -194,22 +194,23 @@ public class TestAll {
 
     @Test
     public void getAbonentByID() {
-//        Abonent abonent = abonentService.getAbonentById(1);
-//        Assert.assertNotNull(abonent);
+        Abonent abonent = abonentService.getAbonentByName("abonent_user1");
+        Abonent abonentID = abonentService.getAbonentById(abonent.getId());
+        Assert.assertNotNull(abonentID);
     }
 
 
     @Test
     public void deleteAbonent() {
 
-//        Abonent testAbonent = new Abonent();
-//        testAbonent.setName("test abonent");
-//        abonentService.createAbonent(testAbonent);
-//
-//        Abonent deleteAbonent = abonentService.getAbonentById(4);
-//        abonentService.deleteAbonent(deleteAbonent);
-//
-//        Assert.assertFalse(abonentService.getAllAbonents().contains(testAbonent));
+        Abonent testAbonent = new Abonent();
+        testAbonent.setName("test abonent");
+        abonentService.createAbonent(testAbonent);
+
+        Abonent deleteAbonent = abonentService.getAbonentById(testAbonent.getId());
+        abonentService.deleteAbonent(deleteAbonent);
+
+        Assert.assertFalse(abonentService.getAllAbonents().contains(testAbonent));
 
     }
 

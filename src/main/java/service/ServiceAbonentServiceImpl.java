@@ -38,8 +38,8 @@ public class ServiceAbonentServiceImpl implements ServiceAbonentService{
     }
 
     @Override
-    public List<Service> GetCurrentServices(Abonent abonent, LocalDate date) {
-        return serviceAbonentDao.GetCurrentServices(abonent, date);
+    public List<Service> getCurrentServices(Abonent abonent, LocalDate date) {
+        return serviceAbonentDao.getCurrentServices(abonent, date);
     }
 
 }

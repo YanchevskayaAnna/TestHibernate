@@ -19,5 +19,5 @@ public interface ServiceAbonentService {
 
     public boolean deleteServiceAbonent(ServiceAbonent serviceAbonent)  ;
 
-    public List<Service> GetCurrentServices(Abonent abonent, LocalDate date);
+    public List<Service> getCurrentServices(Abonent abonent, LocalDate date);
 }

@@ -45,7 +45,7 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         try {
-            req.setAttribute("abonents", userService.getAllAbonentsWithInfo(userService.getUserById(1)));
+            req.setAttribute("abonents", userService.getAllAbonentsWithInfo(userService.getUserByName("user1")));
             req.getRequestDispatcher("WEB-INF/pages/showallabonents.jsp").forward(req, resp);
         } catch (TableIsEmptyException e) {
             e.printStackTrace();

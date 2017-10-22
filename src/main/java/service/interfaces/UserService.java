@@ -25,4 +25,6 @@ public interface UserService {
     public List<Abonent> getAllAbonents(User user) throws TableIsEmptyException;
 
     public List<AbonentInfo> getAllAbonentsWithInfo(User user) throws TableIsEmptyException;
+
+    public User getUserByName(String nameUser);
 }

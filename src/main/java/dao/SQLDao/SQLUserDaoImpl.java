@@ -60,5 +60,16 @@ public class SQLUserDaoImpl extends SQLAbstractDAOImpl<User> implements UserDao 
         return resultlist;
     }
 
+    @Override
+    public User getUserByName(String nameUser){
+        EntityManager em = factory.createEntityManager();
+        //Строим таблицу с полями Сервис Дата с - Дата по
+        String queryString = "SELECT u FROM User u  WHERE u.name = :name";
+        TypedQuery<User> query = em.createQuery(queryString, User.class);
+        query.setParameter("name",   nameUser);
+        return query.getSingleResult();
+
+    }
+
 
 }
